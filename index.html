@@ -478,120 +478,107 @@
 /* ==================== */
 
 /* Small Laptops */
-@media (max-width: 1200px) {
+
+@media (max-width: 1320px) {
     .tower-wrap {
         bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -53%;
+        right: -48%;
         transform: scale(1.5);
         width: 650px;
     }
 }
 
-/* Tablets */
-@media (max-width: 1000px) {
+@media (max-width: 1290px) {
     .tower-wrap {
         bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -57%;
+        right: -49.5%;
         transform: scale(1.5);
-        width: 600px;
+        width: 650px;
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1284px) {
     .tower-wrap {
         bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -72%;
+        right: -50%;
         transform: scale(1.5);
-        width: 600px;
+        width: 650px;
     }
 }
 
-@media (max-width: 810px) {
+@media (max-width: 1242px) {
     .tower-wrap {
         bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -71%;
+        right: -51.5%;
         transform: scale(1.5);
-        width: 600px;
+        width: 650px;
     }
 }
 
-/* Large Phones */
-@media (max-width: 768px) {
+@media (max-width: 1179px) {
     .tower-wrap {
         bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -67%;
+        right: -54%;
         transform: scale(1.5);
-        width: 550px;
+        width: 650px;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1170px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
+        right: -54.5%;
+        transform: scale(1.5);
+        width: 650px;
+    }
+}
+
+@media (max-width: 1125px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
+        right: -56.5%;
+        transform: scale(1.5);
+        width: 650px;
+    }
+}
+
+@media (max-width: 1080px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
+        right: -58.5%;
+        transform: scale(1.5);
+        width: 650px;
+    }
+}
+
+@media (max-width: 828px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
+        right: -77%;
+        transform: scale(1.5);
+        width: 650px;
+    }
+}
+
+@media (max-width: 750px) {
     .tower-wrap {
         bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
         right: -85%;
         transform: scale(1.5);
-        width: 550px;
+        width: 650px;
     }
 }
 
-/* Small Phones */
-@media (max-width: 480px) {
+@media (max-width: 640px) {
     .tower-wrap {
         bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -81%;
+        right: -100%;
         transform: scale(1.5);
-        width: 450px;
+        width: 650px;
     }
 }
+  
 
-/* iPhone SE */
-@media (max-width: 414px) {
-    .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -79%;
-        transform: scale(1.5);
-        width: 400px;
-    }
-}
-
-/* iPhone SE */
-@media (max-width: 390px) {
-    .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -84%;
-        transform: scale(1.5);
-        width: 400px;
-    }
-}
-
-/* iPhone SE */
-@media (max-width: 375px) {
-    .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -87%;
-        transform: scale(1.5);
-        width: 400px;
-    }
-}
-
-/* iPhone SE */
-@media (max-width: 360px) {
-    .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -90%;
-        transform: scale(1.5);
-        width: 400px;
-    }
-}
-
-@media (max-width: 320px) {
-    .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -102%;
-        transform: scale(1.5);
-        width: 400px;
-    }
-}
         
 
         /* All tower components stay same pixel size, but container is scaled */
@@ -2774,19 +2761,17 @@ setTimeout(() => {
     const width = window.innerWidth;
     let buttonDelay = 65000; // default desktop
     
-        if (width <= 320) buttonDelay = 72000;
-    else if (width <= 360) buttonDelay = 67000; // FIXED - HIGHEST
-    else if (width <= 375) buttonDelay = 66000;
-    else if (width <= 384) buttonDelay = 64000;
-    else if (width <= 390) buttonDelay = 60000;
-    else if (width <= 414) buttonDelay = 59000; // FIXED
-    else if (width <= 480) buttonDelay = 54000;
-    else if (width <= 600) buttonDelay = 52000;
-    else if (width <= 768) buttonDelay = 48750;
-    else if (width <= 800) buttonDelay = 48750;
-    else if (width <= 810) buttonDelay = 48750; // FIXED - LOWEST
-    else if (width <= 1000) buttonDelay = 48750;
-    else if (width <= 1200) buttonDelay = 48000;
+        if (width <= 640) buttonDelay = 55000;
+    else if (width <= 750) buttonDelay = 53000;
+    else if (width <= 828) buttonDelay = 51500;
+    else if (width <= 1080) buttonDelay = 48000; // FIXED
+    else if (width <= 1125) buttonDelay = 48000;
+    else if (width <= 1170) buttonDelay = 4700;
+    else if (width <= 1179) buttonDelay = 45750;
+    else if (width <= 1242) buttonDelay = 45750;
+    else if (width <= 1284) buttonDelay = 45750; // FIXED - LOWEST
+    else if (width <= 1290) buttonDelay = 45750;
+    else if (width <= 1320) buttonDelay = 45000;
     
     setTimeout(() => {
         document.getElementById('post-credits-buttons').classList.add('show');
