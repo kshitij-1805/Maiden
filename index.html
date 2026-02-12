@@ -1608,7 +1608,7 @@
     }
 }
 
-/* VIGNETTE - FINAL FIX */
+/* TOP FADE */
 #final-scene::before {
     content: '';
     position: fixed;
@@ -1628,51 +1628,197 @@
         rgba(0,0,0,0.7) 50%,
         rgba(0,0,0,0.3) 80%,
         rgba(0,0,0,0) 100%
-    ) !important;
+    );
 }
 
+/* BOTTOM FADE - JUST ROTATE THE TOP ONE 180deg */
 #final-scene::after {
     content: '';
     position: fixed;
-    bottom: 0 !important;
-    top: auto !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100vw !important;
-    height: 200px !important;
-    z-index: 999999 !important;
-    pointer-events: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    transition: opacity 1.5s ease-in, visibility 0s linear 1.5s !important;
-    background: linear-gradient(to top, 
+    top: 800px;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 200px;
+    z-index: 999999;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.5s ease-in, visibility 0s linear 1.5s;
+    background: linear-gradient(to bottom, 
         rgba(0,0,0,1) 0%,
         rgba(0,0,0,0.9) 20%,
         rgba(0,0,0,0.7) 50%,
         rgba(0,0,0,0.3) 80%,
         rgba(0,0,0,0) 100%
-    ) !important;
+    );
+    rotate: 180deg;
 }
 
+/* SHOW BOTH */
 #final-scene.active.fade-in::before,
 #final-scene.active.fade-in::after {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transition: opacity 1.5s ease-in, visibility 0s linear 0s !important;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1.5s ease-in, visibility 0s linear 0s;
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
     #final-scene::before,
     #final-scene::after {
-        height: 150px !important;
+        height: 150px;
     }
 }
 
 @media (max-width: 480px) {
     #final-scene::before,
     #final-scene::after {
-        height: 120px !important;
+        top: 50px;
+        height: 120px;
+    }
+}
+
+/* POST-CREDITS BUTTONS */
+#post-credits-buttons {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    bottom: -200px; /* Start off screen */
+    opacity: 0;
+    transition: bottom 10s ease-out, opacity 1.5s ease-out;
+
+    z-index: 1002;
+}
+
+#post-credits-buttons.show {
+    bottom: 50%;
+    opacity: 1;
+}
+
+.credit-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    padding: 15px 25px;
+    margin: 0 15px;
+    background: #1a1428;
+    color: #fff;
+    border: 3px solid #7bc0c8;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+    box-shadow: 0 0 15px rgba(123, 192, 200, 0.3);
+}
+
+.credit-btn:hover {
+    transform: scale(1.1);
+    background: #2d1f3d;
+    border-color: #ffcc66;
+    box-shadow: 0 0 25px rgba(255, 204, 102, 0.5);
+}
+
+#dishonor-btn {
+    border-color: #ff6666;
+    box-shadow: 0 0 15px rgba(255, 102, 102, 0.3);
+}
+
+#dishonor-btn:hover {
+    border-color: #ff3333;
+    background: #3d1f1f;
+    box-shadow: 0 0 25px rgba(255, 51, 51, 0.5);
+}
+
+/* LETTER COMPOSER */
+#letter-composer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.9);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.composer-content {
+    background: #1a1428;
+    border: 3px solid #7bc0c8;
+    border-radius: 15px;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 0 50px rgba(123, 192, 200, 0.5);
+}
+
+.composer-content h2 {
+    font-family: 'Press Start 2P', monospace;
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#her-letter {
+    width: 100%;
+    height: 200px;
+    background: #2d1f3d;
+    border: 2px solid #7bc0c8;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    padding: 15px;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+.composer-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.composer-buttons button {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    padding: 10px 20px;
+    background: #7bc0c8;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.composer-buttons button:hover {
+    transform: scale(1.1);
+}
+
+#cancel-letter-btn {
+    background: #ff6666 !important;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .credit-btn {
+        font-size: 10px;
+        padding: 12px 15px;
+        margin: 0 8px;
+    }
+    
+    .composer-content h2 {
+        font-size: 14px;
+    }
+    
+    #her-letter {
+        font-size: 10px;
+        height: 150px;
     }
 }
 
@@ -1860,7 +2006,23 @@
             THE END
                 </div>
             </div>
+            <div id="post-credits-buttons">
+    <button id="write-letter-btn" class="credit-btn">✎ WRITE HIM A LETTER TOO</button>
+    <button id="dishonor-btn" class="credit-btn">⚔ DISHONOR HIS LOVE</button>
+</div>
+
     </div>
+
+    <div id="letter-composer" style="display: none;">
+    <div class="composer-content">
+        <h2>Write Your Letter</h2>
+        <textarea id="her-letter" placeholder="Dearest Knight..."></textarea>
+        <div class="composer-buttons">
+            <button id="send-letter-btn">✈ SEND</button>
+            <button id="cancel-letter-btn">✕ CANCEL</button>
+        </div>
+    </div>
+</div>
     <script>
 // Performance optimization: Throttle animations and events
 let lastTime = 0;
@@ -2151,7 +2313,110 @@ if (isMobile) {
     }, { passive: false });
 }
 
+// Show buttons after credits finish
+setTimeout(() => {
+    const credits = document.getElementById('end-credits');
+    credits.classList.add('start');
+    setTimeout(() => {
+        credits.classList.add('fade-in-now');
+    }, 50);
+    console.log('Credits started');
+    
+    // SHOW BUTTONS AFTER CREDITS SCROLL (45s)
+    setTimeout(() => {
+        document.getElementById('post-credits-buttons').classList.add('show');
+    }, 40000);
+    
+}, 500);
+
+// DISHONOR BUTTON - JANKY SHIT
+document.getElementById('dishonor-btn').onclick = () => {
+    const jankyMessages = [
+        "💔 How could you?!",
+        "⚡ The knight drops his sword...",
+        "🌧 It starts raining on the castle...",
+        "😭 Pigeon2 flies away crying",
+        "📜 The letter burns to ash",
+        "🏰 The tower crumbles!",
+        "💀 He will never love again",
+        "🎭 This was not the way..."
+    ];
+    
+    // Create janky floating messages
+    for(let i = 0; i < 10; i++) {
+        setTimeout(() => {
+            const msg = document.createElement('div');
+            msg.textContent = jankyMessages[Math.floor(Math.random() * jankyMessages.length)];
+            msg.style.cssText = `
+                position: fixed;
+                left: ${Math.random() * 100}vw;
+                top: ${Math.random() * 100}vh;
+                color: #ff6666;
+                font-family: 'Press Start 2P', monospace;
+                font-size: ${Math.random() * 20 + 10}px;
+                z-index: 9999999;
+                text-shadow: 2px 2px 0 #000;
+                animation: floatAway 2s ease-out forwards;
+            `;
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 2000);
+        }, i * 100);
+    }
+    
+    // Shake the screen
+    document.body.style.animation = 'shake 0.5s';
+    setTimeout(() => document.body.style.animation = '', 500);
+    
+    // Disable the button
+    this.disabled = true;
+    this.textContent = '💔 HONOR DESTROYED 💔';
+};
+
+// WRITE LETTER BUTTON
+document.getElementById('write-letter-btn').onclick = () => {
+    document.getElementById('letter-composer').style.display = 'flex';
+};
+
+// SEND LETTER VIA SMS (Email-to-SMS Gateway)
+document.getElementById('send-letter-btn').onclick = () => {
+    const letter = document.getElementById('her-letter').value;
+    if (letter.trim() === '') {
+        alert('Write something first! 💌');
+        return;
+    }
+    
+    // Find your carrier gateway below and replace YOUR_NUMBER
+    window.location.href = `mailto:YOUR_NUMBER@vtext.com?subject=&body=${encodeURIComponent(letter)}`;
+    
+    alert('📱 Letter sent to his phone!');
+    
+    // Close composer
+    document.getElementById('letter-composer').style.display = 'none';
+    document.getElementById('her-letter').value = '';
+};
+
+// CANCEL LETTER
+document.getElementById('cancel-letter-btn').onclick = () => {
+    document.getElementById('letter-composer').style.display = 'none';
+    document.getElementById('her-letter').value = '';
+};
+
+// Add shake animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes floatAway {
+        0% { transform: translateY(0) rotate(0); opacity: 1; }
+        100% { transform: translateY(-100px) rotate(20deg); opacity: 0; }
+    }
+    
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+    }
+`;
+document.head.appendChild(style);
+
     </script>
 </body>
-
 </html>
