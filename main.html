@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Maiden</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Add hardware acceleration and will-change properties */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            overflow: hidden;
+            font-family: 'Press Start 2P', monospace;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            /* Prevent mobile overscroll */
+            overscroll-behavior: none;
+            touch-action: manipulation;
+        }
+        
+        /* Hardware acceleration for scenes */
+        #scene1, #scene2 {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+        
+        /* Optimize animations with will-change */
+        .cloud {
+            will-change: transform;
+        }
+        
+        .wind {
+            will-change: transform;
+        }
+        
+        .wave {
+            will-change: transform;
+        }
+        
+        .pigeon {
+            will-change: transform, left, top;
+        }
+        
+        .pigeon2 {
+            will-change: transform;
+        }
+        
+        .pigeon-wing {
+            will-change: transform;
+        }
+        
+        .breath-wave {
+            will-change: transform, opacity;
+        }
+        
+        /* Your original CSS continues exactly as before... */
+        /* I'll just add the performance improvements above */
+        
+        /* ========== ORIGINAL CSS BELOW ========== */
+        :root {
+            --speed-multiplier: 1;
+        }
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            overflow: hidden;
+            font-family: 'Press Start 2P', monospace;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+        #scene1 {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to bottom, 
+                #3d4a7c 0%,
+                #4a4680 20%,
+                #6b4a7c 45%,
+                #7d5a8c 60%,
+                #9d5a7c 75%,
+                #b06a8c 90%,
+                #c07a9c 100%
+            );
+            position: relative;
+            display: block;
+            image-rendering: pixelated;
+            --speed-multiplier: 1;
+        }
+        #scene1.departing .pigeon {
+            animation: fly-away 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        #scene1.fast-wind { --speed-multiplier: 2.5; }
+        #scene1.fast-wind .wave { animation-duration: 3.5s !important; }
+        #scene1.fast-wind .cloud { animation-duration: 12s !important; }
+        #scene1.departing .wind {
+            animation-duration: 1.2s !important;
+            transition: animation-duration 0.8s ease-in;
+        }
+        .waves {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 35vh;
+            background: linear-gradient(to bottom, #6bc9e8 0%, #6bc9e8 5%, #4a9aba 15%, #3d7a9e 30%, #2e5f8f 60%, #2e5f8f 100%);
+            border-top: 3px solid #8dd9f0;
+            overflow: hidden;
+        }
+        .cloud {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            background: white;
+            border-radius: 0;
+            box-shadow: 0 0 0 4px white, 20px -10px 0 0px white, 40px -10px 0 0px white, 60px 0 0 0px white;
+            animation: float-cloud 20s linear infinite;
+        }
+        .cloud:nth-child(2) { top: 15%; left: 100%; animation-delay: -5s; opacity: 0.8; }
+        .cloud:nth-child(3) { top: 25%; left: 100%; animation-delay: -10s; opacity: 0.9; }
+        .cloud:nth-child(4) { top: 10%; left: 100%; animation-delay: -15s; opacity: 0.7; }
+        .cloud:nth-child(5) { top: 20%; left: 100%; animation-delay: -3s; opacity: 0.85; }
+        .cloud:nth-child(6) { top: 18%; left: 100%; animation-delay: -12s; opacity: 0.75; }
+        .cloud:nth-child(7) { top: 22%; left: 100%; animation-delay: -7s; opacity: 0.8; }
+        .cloud:nth-child(8) { top: 12%; left: 100%; animation-delay: -18s; opacity: 0.7; }
+        @keyframes float-cloud {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc((-100vw - 200px) * var(--speed-multiplier))); }
+        }
+        .wind {
+            position: absolute;
+            top: 10%;
+            left: 100%;
+            width: 100px;
+            height: 3px;
+            background: rgb(233, 233, 233);
+            border-radius: 0;
+            animation: float-wind 2.5s linear infinite;
+        }
+        .wind:nth-child(1) { top: 44%; left: 105%; animation: float-wind 2.1s linear infinite; animation-delay: 500ms; }
+        .wind:nth-child(2) { top: 30%; left: 105%; animation: float-wind 2.3s linear infinite; animation-delay: 1000ms; }
+        .wind:nth-child(3) { top: 65%; left: 105%; animation: float-wind 2.8s linear infinite; animation-delay: 1000ms; }
+        .wind:nth-child(4) { top: 25%; left: 105%; animation: float-wind 2.6s linear infinite; animation-delay: 1200ms; }
+        .wind:nth-child(5) { top: 40%; left: 105%; animation: float-wind 2.7s linear infinite; animation-delay: 1500ms; }
+        @keyframes float-wind {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc((-100vw - 200px) * var(--speed-multiplier))); }
+        }
+        .wave {
+            position: absolute;
+            top: 80%;
+            left: 100%;
+            width: 5px;
+            height: 5px;
+            background: rgb(255, 255, 255);
+            border-radius: 0;
+            box-shadow: 0 0 0 0px rgb(255,255,255), 5px -4px 0 0px rgb(245,254,255), 10px -4px 0 0px rgb(238,248,255), 15px 0 0 0px rgb(237,249,255), 20px -5px 0 0px rgb(245,254,255), 25px 0 0 0px rgb(237,249,255), 30px 0 0 0px rgb(237,249,255), 35px -5px 0 0px rgb(245,254,255), 40px -5px 0 0px rgb(238,248,255), 45px 0 0 0px rgb(237,249,255);
+            animation: float-wave 10s linear infinite;
+            opacity: 0.4;
+        }
+        .waves .wave:nth-child(1) { top: 10%; animation-delay: 1000ms; opacity: 0.35; }
+        .waves .wave:nth-child(2) { top: 30%; animation-delay: 6600ms; opacity: 0.45; }
+        .waves .wave:nth-child(3) { top: 50%; animation-delay: 3800ms; opacity: 0.3; }
+        .waves .wave:nth-child(4) { top: 70%; animation-delay: 5200ms; opacity: 0.25; }
+        .waves .wave:nth-child(5) { top: 80%; animation-delay: 9400ms; opacity: 0.4; }
+        @keyframes float-wave {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc((-100vw - 200px) * var(--speed-multiplier))); }
+        }
+        .pigeon {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            left: -100px;
+            top: 30%;
+            animation: fly-across 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            image-rendering: pixelated;
+        }
+        .pigeon-body {
+            position: absolute; width: 24px; height: 12px; background: #e0e0e0; left: 12px; top: 14px;
+            box-shadow: -4px 0 0 0 #b0b0b0, -4px -4px 0 0 #b0b0b0, 0 -4px 0 0 #d0d0d0, 4px -4px 0 0 #f0f0f0, 8px 0 0 0 #c0c0c0;
+        }
+        .pigeon-head {
+            position: absolute; width: 45px; height: 12px; background: #d0d0d0; left: 8px; top: 8px;
+            box-shadow: -4px 0 0 0 #b0b0b0, 0 -4px 0 0 #e0e0e0, 4px 0 0 0 #f0f0f0;
+        }
+        .pigeon-beak { position: absolute; width: 10px; height: 4px; background: #ff9d3c; left: 55px; top: 15px; }
+        .pigeon-eye { position: absolute; width: 3px; height: 3px; background: #000; left: 50px; top: 10px; }
+        .pigeon-wing {
+            position: absolute; width: 16px; height: 8px; background: #c0c0c0; left: 16px; top: 18px;
+            transform-origin: left center;
+            box-shadow: 4px -4px 0 0 #b0b0b0, 8px -4px 0 0 #a0a0a0;
+            animation: flap 0.3s steps(2) infinite;
+        }
+        @keyframes flap {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+            100% { transform: translateY(0px); }
+        }
+        .pigeon-tail {
+            position: absolute; width: 12px; height: 8px; background: #b0b0b0; left: -3px; top: 12px;
+            box-shadow: 4px 0 0 0 #a0a0a0, 4px 4px 0 0 #909090;
+        }
+        .pigeon-leg { position: absolute; width: 2px; height: 6px; background: #ff8866; left: 20px; top: 32px; }
+        .pigeon-leg:nth-child(2) { left: 24px; }
+        .pigeon-scroll {
+            position: absolute; width: 5px; height: 8px; background: #f4e4c1; left: 18px; top: 30px;
+            border: 1px solid #d4c4a1;
+            box-shadow: 0 2px 0 0 #8b7355, 0 -2px 0 0 #8b7355;
+        }
+        .scroll-seal { position: absolute; width: 2px; height: 2px; background: #cc3333; left: 0.5px; top: 3px; }
+        @keyframes fly-across {
+            0% { left: -100px; top: 25%; }
+            90% { left: 50%; top: 34%; transform: translateX(-50%); }
+            100% { left: 50%; top: 35%; transform: translateX(-50%); }
+        }
+        @keyframes fly-away {
+            0% { left: 50%; top: 35%; transform: translateX(-50%); }
+            15% { left: 50%; top: 38%; transform: translateX(-50%); }
+            50% { left: 65%; top: 28%; transform: translateX(-50%); }
+            100% { left: 115%; top: 8%; transform: translateX(-50%); }
+        }
+        #tap-overlay {
+            position: absolute; inset: 0; z-index: 50;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.6s ease;
+        }
+        #tap-overlay.show { opacity: 1; pointer-events: auto; }
+        .tap-text {
+            font-family: 'Press Start 2P', monospace; font-size: 25px; color: white;
+            animation: breathe 2s ease-in-out infinite;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.6);
+        }
+        @keyframes breathe {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        @media (max-width: 600px) { .tap-text { font-size: 24px; } }
+
+        /* ======================== */
+        /* SCENE 2: ISLAND & TOWER  */
+        /* ======================== */
+        #scene2 {
+            position: absolute; inset: 0; width: 100vw; height: 100vh;
+            opacity: 0; pointer-events: none; z-index: 10;
+            transition: filter 0.5s ease;
+            background: linear-gradient(to bottom, 
+                #3d4a7c 0%,
+                #4a4680 20%,
+                #6b4a7c 45%,
+                #7d5a8c 60%,
+                #9d5a7c 75%,
+                #b06a8c 90%,
+                #c07a9c 100%
+            );
+        }
+        #scene2.visible { opacity: 1; pointer-events: auto; }
+        #blur-overlay {
+            position: fixed; inset: 0; z-index: 9;
+            opacity: 0; pointer-events: none; 
+            filter: blur(12px); 
+            transition: opacity 0.3s ease;
+            display: none;
+        }
+        #blur-overlay.show { opacity: 1; display: block; }
+        #scene2.rush { animation: camera-rush 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        @keyframes camera-rush {
+            0% { transform: scale(1.8); opacity: 0; filter: blur(10px); }
+            30% { opacity: 1; filter: blur(6px); }
+            60% { transform: scale(1.1); filter: blur(2px); }
+            100% { transform: scale(1); filter: blur(0px); }
+        }
+        #scene2 .ocean {
+            position: absolute; bottom: 0; width: 100%; height: 35vh;
+            background: linear-gradient(to bottom, #6bc9e8 0%, #6bc9e8 5%, #4a9aba 15%, #3d7a9e 30%, #2e5f8f 60%, #2e5f8f 100%);
+            border-top: 3px solid #8dd9f0; overflow: hidden; z-index: 5;
+        }
+        
+        /* Floating wave pixels */
+        #scene2 .wave {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgb(255, 255, 255);
+            border-radius: 0;
+            box-shadow: 
+                0 0 0 0px rgb(255,255,255), 
+                5px -4px 0 0px rgb(245,254,255), 
+                10px -4px 0 0px rgb(238,248,255), 
+                15px 0 0 0px rgb(237,249,255), 
+                20px -5px 0 0px rgb(245,254,255), 
+                25px 0 0 0px rgb(237,249,255), 
+                30px 0 0 0px rgb(237,249,255), 
+                35px -5px 0 0px rgb(245,254,255), 
+                40px -5px 0 0px rgb(238,248,255), 
+                45px 0 0 0px rgb(237,249,255);
+            animation: wave-spawn 3s ease-in-out infinite;
+        }
+        
+        #scene2 .wave:nth-child(4) { top: 10%; left: 15%; animation-delay: 0s; }
+        #scene2 .wave:nth-child(5) { top: 30%; left: 45%; animation-delay: 0.8s; }
+        #scene2 .wave:nth-child(6) { top: 50%; left: 25%; animation-delay: 1.2s; }
+        #scene2 .wave:nth-child(7) { top: 70%; left: 65%; animation-delay: 0.4s; }
+        #scene2 .wave:nth-child(8) { top: 80%; left: 35%; animation-delay: 1.6s; }
+        #scene2 .wave:nth-child(9) { top: 20%; left: 75%; animation-delay: 2.0s; }
+        #scene2 .wave:nth-child(10) { top: 60%; left: 55%; animation-delay: 0.6s; }
+        #scene2 .wave:nth-child(11) { top: 40%; left: 85%; animation-delay: 1.4s; }
+        
+        @keyframes wave-spawn {
+            0% { 
+                opacity: 0;
+            }
+            20% { 
+                opacity: 0.4;
+            }
+            40% { 
+                opacity: 0.6;
+            }
+            60% { 
+                opacity: 0.4;
+            }
+            80% { 
+                opacity: 0.2;
+            }
+            100% { 
+                opacity: 0;
+            }
+        }
+        .breath-wave {
+            position: absolute; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(107,201,232,0.3) 0%, transparent 40%);
+        }
+        .breath-wave:nth-child(1) { top: 0; animation: wave-breathe 4s ease-in-out infinite; }
+        .breath-wave:nth-child(2) { top: 0; animation: wave-breathe 5.5s ease-in-out infinite; animation-delay: -2s; opacity: 0.7; }
+        .breath-wave:nth-child(3) { top: 0; animation: wave-breathe 7s ease-in-out infinite; animation-delay: -3.5s; opacity: 0.5; }
+        @keyframes wave-breathe {
+            0%, 100% { transform: translateY(0px); opacity: 0.4; }
+            50% { transform: translateY(-6px); opacity: 0.8; }
+        }
+        .island {
+            position: absolute; bottom: 0; right: -60px; width: 320px; height: 100%; pointer-events: none;
+        }
+        .island-oval {
+            position: absolute; bottom: calc(35vh - 140px); left: 50%; transform: translateX(-50%);
+            width: 280px; height: 160px; z-index: 1;
+        }
+        .island-row {
+            position: absolute; left: 50%; transform: translateX(-50%); height: 16px; background: #8b6f3a;
+        }
+        .island-row::before, .island-row::after {
+            content: ''; position: absolute; top: 0; height: 100%; width: 16px;
+        }
+        .island-row::before { left: -16px; }
+        .island-row::after { right: -16px; }
+        .island-row:nth-child(1)  { top: 0;   width: 240px; background: #2d8d0f; }
+        .island-row:nth-child(1)::before { background: #c4a882; }
+        .island-row:nth-child(1)::after  { background: #c4a882; }
+        .island-row:nth-child(2)  { top: 16px; width: 256px; background: #8a8a60; }
+        .island-row:nth-child(2)::before { background: #d4bc96; }
+        .island-row:nth-child(2)::after  { background: #d4bc96; }
+        .island-row:nth-child(3)  { top: 32px; width: 268px; background: #a09060; }
+        .island-row:nth-child(3)::before { background: #c9ad7a; }
+        .island-row:nth-child(3)::after  { background: #c9ad7a; }
+        .island-row:nth-child(4)  { top: 48px; width: 264px; background: #b8a070; }
+        .island-row:nth-child(4)::before { background: #dcc8a0; }
+        .island-row:nth-child(4)::after  { background: #dcc8a0; }
+        .island-row:nth-child(5)  { top: 64px; width: 248px; background: #c9b080; }
+        .island-row:nth-child(5)::before { background: #c4a882; }
+        .island-row:nth-child(5)::after  { background: #c4a882; }
+        .island-row:nth-child(6)  { top: 80px; width: 224px; background: #d0b888; }
+        .island-row:nth-child(6)::before { background: #d4bc96; }
+        .island-row:nth-child(6)::after  { background: #d4bc96; }
+        .island-row:nth-child(7)  { top: 96px; width: 192px; background: #d4bc90; }
+        .island-row:nth-child(7)::before { background: #c9ad7a; }
+        .island-row:nth-child(7)::after  { background: #c9ad7a; }
+        .island-row:nth-child(8)  { top: 112px; width: 152px; background: #d8c098; }
+        .island-row:nth-child(8)::before { background: #dcc8a0; }
+        .island-row:nth-child(8)::after  { background: #dcc8a0; }
+        .island-row:nth-child(9)  { top: 128px; width: 96px; background: #dcc8a0; }
+        .island-row:nth-child(9)::before { background: #d4bc96; }
+        .island-row:nth-child(9)::after  { background: #d4bc96; }
+        .island-row:nth-child(10) { top: 144px; width: 48px; background: #e0d0a8; }
+        .island-row:nth-child(10)::before { background: #d4bc96; }
+        .island-row:nth-child(10)::after  { background: #d4bc96; }
+
+        .island-boulder { position: absolute; z-index: 2; }
+        .island-boulder:nth-child(1)  { width: 40px; height: 16px; top: 96px;  left: calc(50% - 120px); background: #4a4540; }
+        .island-boulder:nth-child(2)  { width: 24px; height: 16px; top: 80px;  left: calc(50% - 116px); background: #5a5550; }
+        .island-boulder:nth-child(3)  { width: 16px; height: 16px; top: 80px;  left: calc(50% - 92px);  background: #4a4540; }
+        .island-boulder:nth-child(4)  { width: 8px;  height: 8px;  top: 72px;  left: calc(50% - 112px); background: #6a6560; }
+        .island-boulder:nth-child(5)  { width: 24px; height: 16px; top: 112px; left: calc(50% - 104px); background: #555048; }
+        .island-boulder:nth-child(6)  { width: 16px; height: 8px;  top: 112px; left: calc(50% - 80px);  background: #4a4540; }
+        .island-boulder:nth-child(7)  { width: 36px; height: 16px; top: 96px;  left: calc(50% + 84px);  background: #4a4540; }
+        .island-boulder:nth-child(8)  { width: 20px; height: 16px; top: 80px;  left: calc(50% + 92px);  background: #5a5550; }
+        .island-boulder:nth-child(9)  { width: 16px; height: 16px; top: 80px;  left: calc(50% + 72px);  background: #555048; }
+        .island-boulder:nth-child(10) { width: 8px;  height: 8px;  top: 72px;  left: calc(50% + 96px);  background: #6a6560; }
+        .island-boulder:nth-child(11) { width: 28px; height: 16px; top: 112px; left: calc(50% + 68px);  background: #4a4540; }
+        .island-boulder:nth-child(12) { width: 8px;  height: 8px;  top: 128px; left: calc(50% + 52px);  background: #555048; }
+        .island-boulder:nth-child(13) { width: 24px; height: 8px;  top: 144px; left: calc(50% - 12px);  background: #4a4540; }
+        .island-boulder:nth-child(14) { width: 16px; height: 8px;  top: 144px; left: calc(50% + 20px);  background: #555048; }
+
+        .island-green-top {
+            position: absolute; bottom: calc(35vh - 22px); left: 50%; transform: translateX(-50%);
+            width: 240px; height: 22px; background: #b58a44; z-index: 6;
+        }
+        .island-dirt { position: absolute; z-index: 6; }
+        .island-dirt:nth-child(2)  { width: 32px; height: 16px; bottom: calc(35vh - 16px); left: 2%;  background: #a08060; }
+        .island-dirt:nth-child(3)  { width: 16px; height: 16px; bottom: calc(35vh - 0px);  left: 2%;  background: #b89878; }
+        .island-dirt:nth-child(4)  { width: 16px; height: 16px; bottom: calc(35vh - 0px);  left: 6%;  background: #9a7a58; }
+        .island-dirt:nth-child(5)  { width: 8px;  height: 8px;  bottom: calc(35vh + 8px);  left: 3%;  background: #c4a882; }
+        .island-dirt:nth-child(6)  { width: 36px; height: 16px; bottom: calc(35vh - 16px); right: 4%; background: #a08060; }
+        .island-dirt:nth-child(7)  { width: 16px; height: 16px; bottom: calc(35vh - 0px);  right: 8%; background: #9a7a58; }
+        .island-dirt:nth-child(8)  { width: 20px; height: 16px; bottom: calc(35vh - 0px);  right: 4%; background: #b89878; }
+        .island-dirt:nth-child(9)  { width: 8px;  height: 8px;  bottom: calc(35vh + 8px);  right: 6%; background: #c4a882; }
+        .island-dirt:nth-child(10) { width: 8px;  height: 8px;  bottom: calc(35vh - 8px);  left: 10%; background: #b89878; }
+        .island-dirt:nth-child(11) { width: 8px;  height: 8px;  bottom: calc(35vh - 8px);  right: 12%; background: #9a7a58; }
+        .island-moss { position: absolute; z-index: 7; background: #3d6b2a; }
+        .island-moss:nth-child(1) { width: 24px; height: 8px; bottom: calc(35vh - 10px); left: 18%; }
+        .island-moss:nth-child(2) { width: 16px; height: 8px; bottom: calc(35vh - 12px); left: 48%; }
+        .island-moss:nth-child(3) { width: 20px; height: 8px; bottom: calc(35vh - 8px); left: 68%; }
+
+        /* ======================== */
+        /* DARK CASTLE TOWER - SCALED 2.5x */
+        /* ======================== */
+        .tower-wrap {
+            position: absolute;
+            bottom: calc(88vh - 22px);
+            right: -700px;
+            width: 700px;  /* 280 * 2.5 */
+            z-index: 7;
+            pointer-events: none;
+            transform: scale(1.5);
+            transform-origin: bottom center;
+        }
+        
+
+        /* All tower components stay same pixel size, but container is scaled */
+        
+        /* === SPIRES === */
+        .tower-spire {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 32px solid #1a1428;
+        }
+        .tower-spire.tall { border-bottom: 40px solid #1a1428; }
+        .tower-spire:nth-child(1) { top: 0; left: 50px; }
+        .tower-spire:nth-child(2) { top: 8px; left: 70px; }
+        .tower-spire:nth-child(3) { top: 0; left: 90px; }
+        .tower-spire:nth-child(4) { top: 8px; left: 110px; }
+        .tower-spire:nth-child(5) { top: 0; left: 130px; }
+
+        .spire-cap {
+            position: absolute;
+            width: 4px;
+            height: 8px;
+            background: #0d0a14;
+        }
+        .spire-cap:nth-child(6) { top: -8px; left: 54px; }
+        .spire-cap:nth-child(7) { top: 0; left: 74px; }
+        .spire-cap:nth-child(8) { top: -8px; left: 94px; }
+        .spire-cap:nth-child(9) { top: 0; left: 114px; }
+        .spire-cap:nth-child(10) { top: -8px; left: 134px; }
+
+        .tower-upper {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            width: 120px;
+            height: 60px;
+            background: #24182e;
+            box-shadow: inset -2px 0 0 #1a1428;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent 0px, transparent 8px, #1a1428 8px, #1a1428 9px),
+                repeating-linear-gradient(90deg, transparent 0px, transparent 15px, #1a1428 15px, #1a1428 16px);
+        }
+        .tower-upper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 7px, #1a1428 7px, #1a1428 8px, transparent 8px, transparent 22px);
+            -webkit-mask-image: repeating-linear-gradient(0deg, black 0px, black 8px, transparent 8px, transparent 17px);
+            mask-image: repeating-linear-gradient(0deg, black 0px, black 8px, transparent 8px, transparent 17px);
+        }
+
+        .tower-body {
+            position: absolute;
+            top: 100px;
+            left: 30px;
+            width: 140px;
+            height: 200px;
+            background: #2d1f3d;
+            box-shadow: 
+                inset -3px 0 0 #1a1428,
+                inset 3px 0 0 #382850;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent 0px, transparent 10px, #1a1428 10px, #1a1428 11px),
+                repeating-linear-gradient(90deg, transparent 0px, transparent 18px, #1a1428 18px, #1a1428 19px);
+        }
+        .tower-body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 9px, #1a1428 9px, #1a1428 10px, transparent 10px, transparent 27px);
+            -webkit-mask-image: repeating-linear-gradient(0deg, black 0px, black 10px, transparent 10px, transparent 21px);
+            mask-image: repeating-linear-gradient(0deg, black 0px, black 10px, transparent 10px, transparent 21px);
+        }
+
+        .tower-turret-left {
+            position: absolute;
+            top: 150px;
+            left: 0;
+            width: 32px;
+            height: 120px;
+            background: #24182e;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent 0px, transparent 8px, #1a1428 8px, #1a1428 9px),
+                repeating-linear-gradient(90deg, transparent 0px, transparent 12px, #1a1428 12px, #1a1428 13px);
+        }
+        .tower-turret-left::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 6px, #1a1428 6px, #1a1428 7px, transparent 7px, transparent 18px);
+            -webkit-mask-image: repeating-linear-gradient(0deg, black 0px, black 8px, transparent 8px, transparent 17px);
+            mask-image: repeating-linear-gradient(0deg, black 0px, black 8px, transparent 8px, transparent 17px);
+        }
+
+        .tower-turret-right {
+            position: absolute;
+            top: 160px;
+            left: 168px;
+            width: 40px;
+            height: 110px;
+            background: #2d1f3d;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent 0px, transparent 9px, #1a1428 9px, #1a1428 10px),
+                repeating-linear-gradient(90deg, transparent 0px, transparent 14px, #1a1428 14px, #1a1428 15px);
+        }
+        .tower-turret-right::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 7px, #1a1428 7px, #1a1428 8px, transparent 8px, transparent 21px);
+            -webkit-mask-image: repeating-linear-gradient(0deg, black 0px, black 9px, transparent 9px, transparent 19px);
+            mask-image: repeating-linear-gradient(0deg, black 0px, black 9px, transparent 9px, transparent 19px);
+        }
+
+        .tower-base {
+            position: absolute;
+            top: 300px;
+            left: 20px;
+            width: 160px;
+            height: 60px;
+            background: #382850;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent 0px, transparent 10px, #1a1428 10px, #1a1428 11px),
+                repeating-linear-gradient(90deg, transparent 0px, transparent 20px, #1a1428 20px, #1a1428 21px);
+        }
+        .tower-base::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 10px, #1a1428 10px, #1a1428 11px, transparent 11px, transparent 30px);
+            -webkit-mask-image: repeating-linear-gradient(0deg, black 0px, black 10px, transparent 10px, transparent 21px);
+            mask-image: repeating-linear-gradient(0deg, black 0px, black 10px, transparent 10px, transparent 21px);
+        }
+
+        /* === WINDOWS === */
+        .tower-window {
+            position: absolute;
+            width: 8px;
+            height: 16px;
+            background: #1a1428;
+            border: none;
+            border-radius: 0;
+            z-index: 8;
+            box-shadow: 
+                inset 0 0 3px #ffcc66,
+                0 0 6px rgba(255, 204, 102, 0.5);
+        }
+        .tower-window::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: linear-gradient(to bottom, #ffcc66 0%, #ff9944 100%);
+            animation: window-glow 2.5s ease-in-out infinite alternate;
+        }
+        @keyframes window-glow {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        /* Main tower body - 3 columns, 2 rows */
+        .tower-window:nth-child(11) { top: 130px; left: 50px; }  /* row 1, col 1 */
+        .tower-window:nth-child(12) { top: 130px; left: 85px; }  /* row 1, col 2 */
+        .tower-window:nth-child(13) { top: 130px; left: 120px; } /* row 1, col 3 */
+        .tower-window:nth-child(14) { top: 200px; left: 50px; }  /* row 2, col 1 */
+        .tower-window:nth-child(15) { top: 200px; left: 85px; }  /* row 2, col 2 */
+        .tower-window:nth-child(16) { top: 200px; left: 120px; } /* row 2, col 3 */
+
+        /* Upper tower - 2 columns (narrower section) */
+        .tower-window:nth-child(17) { top: 55px; left: 60px; }   /* upper row 1, col 1 */
+        .tower-window:nth-child(18) { top: 55px; left: 100px; }  /* upper row 1, col 2 */
+
+        /* Left turret - 1 column, 2 rows */
+        .tower-window:nth-child(19) { top: 180px; left: 12px; }  /* turret left row 1 */
+        .tower-window:nth-child(20) { top: 230px; left: 12px; }  /* turret left row 2 */
+
+        /* Right turret - 1 column, 2 rows */
+        .tower-window:nth-child(21) { top: 190px; left: 180px; } /* turret right row 1 */
+        .tower-window:nth-child(22) { top: 235px; left: 180px; } /* turret right row 2 */
+
+        /* Base section - 3 columns, 1 row */
+        .tower-window:nth-child(23) { top: 320px; left: 45px; }  /* base col 1 */
+        .tower-window:nth-child(24) { top: 320px; left: 85px; }  /* base col 2 */
+        .tower-window:nth-child(25) { top: 320px; left: 125px; } /* base col 3 */
+
+        /* === MAIN PRINCESS WINDOW === */
+        .tower-window-main {
+            position: absolute;
+            top: 175px;
+            left: 50px;
+            width: 35px;  /* Scaled up from 14px */
+            height: 50px;  /* Scaled up from 28px */
+            background: #1a1428;
+            border: 1px solid #24182e;
+            border-radius: 15px 15px 0 0;
+            z-index: 10;
+            cursor: pointer;
+            pointer-events: auto;
+            perspective: 250px;
+        }
+
+        /* Window panes */
+        .pane-left {
+            position: absolute;
+            top: 2px; left: 2px;
+            width: calc(50% - 2px);
+            height: calc(100% - 4px);
+            border-radius: 12px 0 0 0;
+            background: linear-gradient(135deg, #ffcc66 0%, #ff9944 100%);
+            transform-origin: left center;
+            transform: rotateY(0deg);
+            transition: transform 0.5s steps(5);
+            z-index: 12;
+        }
+        .pane-right {
+            position: absolute;
+            top: 2px; right: 2px;
+            width: calc(50% - 2px);
+            height: calc(100% - 4px);
+            border-radius: 0 12px 0 0;
+            background: linear-gradient(225deg, #ffcc66 0%, #ff9944 100%);
+            transform-origin: right center;
+            transform: rotateY(0deg);
+            transition: transform 0.5s steps(5);
+            z-index: 12;
+        }
+        .tower-window-main.open .pane-left  { transform: rotateY(-75deg); }
+        .tower-window-main.open .pane-right { transform: rotateY(75deg); }
+
+        /* Maiden wrap */
+        .maiden-wrap {
+            position: absolute;
+            inset: 8px 8px 10px 8px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            z-index: 11;
+        }
+        .maiden-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, #1a0a00 0%, #2d1a0a 60%, #1a0a00 100%);
+        }
+        .maiden-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 80%, rgba(255,200,100,0.15) 0%, transparent 70%);
+            animation: candle-flicker 2.2s steps(2) infinite alternate;
+        }
+        @keyframes candle-flicker {
+            0%   { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Maiden - scaled to fit larger window */
+        .maiden {
+    position: absolute;
+    bottom: -30px; 
+    left: 135%; /* Start off-screen to the RIGHT */
+    width: 10px;
+    height: 60px;
+    transform: scale(0.8);
+    transition: transform 0.6s steps(5) 0.3s, left 0.6s steps(5) 0.3s; /* Animate position too */
+    transform-origin: center center;
+}
+
+.tower-window-main.open .maiden {
+    left: -15%; /* Negative moves her left */
+    transform: scale(0.8);
+}
+
+
+        /* All maiden parts - keeping original pixel sizes */
+        .maiden .m-hair-top { position: absolute; top: 0; left: 10px; width: 10px; height: 3px; background: #1a0a00; }
+        .maiden .m-hair-mid { position: absolute; top: 3px; left: 6px; width: 18px; height: 3px; background: #1a0a00; }
+        .maiden .m-hair-wide { position: absolute; top: 6px; left: 4px; width: 22px; height: 6px; background: #1a0a00; }
+        .maiden .m-braid-l1 { position: absolute; top: 12px; left: 0; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-braid-l2 { position: absolute; top: 15px; left: 0; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-braid-l3 { position: absolute; top: 18px; left: 0; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-braid-l4 { position: absolute; top: 21px; left: 1px; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-braid-l5 { position: absolute; top: 24px; left: 1px; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-braid-r1 { position: absolute; top: 12px; left: 27px; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-braid-r2 { position: absolute; top: 15px; left: 27px; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-braid-r3 { position: absolute; top: 18px; left: 27px; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-braid-r4 { position: absolute; top: 21px; left: 26px; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-braid-r5 { position: absolute; top: 24px; left: 26px; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-braid-r6 { position: absolute; top: 27px; left: 24px; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-braid-r7 { position: absolute; top: 30px; left: 22px; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-tiara-band1 { position: absolute; top: 3px; left: 7px; width: 3px; height: 3px; background: #7bc0c8; }
+        .maiden .m-tiara-band2 { position: absolute; top: 3px; left: 20px; width: 3px; height: 3px; background: #7bc0c8; }
+        .maiden .m-tiara-band3 { position: absolute; top: 6px; left: 6px; width: 3px; height: 3px; background: #7bc0c8; }
+        .maiden .m-tiara-band4 { position: absolute; top: 6px; left: 21px; width: 3px; height: 3px; background: #7bc0c8; }
+        .maiden .m-tiara-gold1 { position: absolute; top: 1px; left: 12.7px; width: 4px; height: 3px; background: #ffd700; }
+        .maiden .m-tiara-gold2 { position: absolute; top: 3px; left: 10px; width: 4px; height: 3px; background: #ffd700; }
+        .maiden .m-tiara-gold3 { position: absolute; top: 3px; left: 13px; width: 4px; height: 3px; background: #ffd700; }
+        .maiden .m-tiara-gold4 { position: absolute; top: 3px; left: 16px; width: 4px; height: 3px; background: #ffd700; }
+        .maiden .m-tiara-jewel { position: absolute; top: 1px; left: 13px; width: 3px; height: 3px; background: #4a6fb6; }
+        .maiden .m-face { position: absolute; top: 9px; left: 7px; width: 16px; height: 10px; background: #e0a888; }
+        .maiden .m-eye-l { position: absolute; top: 12px; left: 9px; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-eye-r { position: absolute; top: 12px; left: 18px; width: 3px; height: 3px; background: #1a0a00; }
+        .maiden .m-blush-l { position: absolute; top: 15px; left: 6px; width: 3px; height: 3px; background: #ffb0c8; }
+        .maiden .m-blush-r { position: absolute; top: 15px; left: 21px; width: 3px; height: 3px; background: #ffb0c8; }
+        .maiden .m-mouth { position: absolute; top: 17px; left: 12px; width: 6px; height: 2px; background: #a05069; }
+        .maiden .m-earring-l { position: absolute; top: 14px; left: 5px; width: 3px; height: 3px; background: #ffd700; }
+        .maiden .m-earring-r { position: absolute; top: 14px; left: 22px; width: 3px; height: 3px; background: #ffd700; }
+        .maiden .m-neck { position: absolute; top: 19px; left: 11px; width: 8px; height: 3px; background: #e0a888; }
+        .maiden .m-choker { position: absolute; top: 20px; left: 9px; width: 12px; height: 3px; background: #7bc0c8; }
+        .maiden .m-dress-top { position: absolute; top: 23px; left: 6px; width: 18px; height: 3px; background: #e0a888; }
+        .maiden .m-dress { position: absolute; top: 26px; left: 5px; width: 20px; height: 28px; background: #7bc0c8; }
+        .maiden .m-dress-center { position: absolute; top: 26px; left: 12px; width: 6px; height: 28px; background: #4a7888; }
+        .maiden .m-arm-l { position: absolute; top: 24px; left: 5px; width: 3px; height: 6px; background: #e0a888; }
+        .maiden .m-arm-r { position: absolute; top: 24px; left: 22px; width: 3px; height: 6px; background: #e0a888; }
+        .maiden .m-hand-l { position: absolute; top: 30px; left: 5px; width: 3px; height: 3px; background: #e0a888; }
+        .maiden .m-hand-r { position: absolute; top: 30px; left: 22px; width: 3px; height: 3px; background: #e0a888; }
+
+        /* TAP HINT */
+        #tap-window-hint {
+            position: absolute;
+            bottom: calc(35vh + 215px);
+            right: 200px;
+            z-index: 20;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 17px;
+            color: #fff;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.7);
+            opacity: 0;
+            pointer-events: auto;
+            cursor: pointer;
+            transition: opacity 0.5s;
+        }
+        #tap-window-hint.show { opacity: 1; animation: hint-breathe 1.8s steps(3) infinite; }
+        @keyframes hint-breathe {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50%      { transform: translateY(-2px); opacity: 1; }
+        }
+
+        /* PIGEON PECK */
+        @keyframes pigeon-peck {
+            0%   { transform: translateX(20px); }
+            20%  { transform: translateX(33px); }
+            40%  { transform: translateX(20px); }
+            60%  { transform: translateX(33px); }
+            80%  { transform: translateX(20px); }
+            100% { transform: translateX(20px); }
+        }
+        .pigeon2.pecking {
+            animation: pigeon-peck 0.6s steps(5) forwards !important;
+        }
+
+        /* PIGEON2 */
+        .pigeon2 {
+    position: absolute;
+    width: 48px; height: 48px;
+    /* START BEHIND THE VIEWPORT */
+    left: -1000px; /* Way way off screen */
+    bottom: -1000px; /* Also below screen */
+    z-index: -100; /* Behind everything */
+    pointer-events: none;
+    opacity: 0; /* Invisible */
+    visibility: hidden; /* Hidden */
+}
+
+/* Only show and position when scene2 is fully ready */
+#scene2.visible .pigeon2 {
+    opacity: 1;
+    visibility: visible;
+    z-index: 8;
+    left: auto;
+    bottom: auto;
+    bottom: calc(35vh + 215px);
+    right: 120px;
+    animation: pigeon2-fly-from-nowhere 3s ease-in-out 1s forwards;
+    transform: translateX(-100vw); /* Start off screen left */
+}
+
+@keyframes pigeon2-fly-from-nowhere {
+    0% { 
+        transform: translateX(-100vw); 
+        opacity: 0;
+    }
+    20% { 
+        opacity: 1;
+    }
+    80% { 
+        transform: translateX(0);
+    }
+    100% { 
+        transform: translateX(0);
+    }
+}
+        .pigeon2 .p-wing {
+            position: absolute; width: 16px; height: 8px; background: #c0c0c0; left: 16px; top: 18px;
+            transform-origin: left center;
+            box-shadow: 4px -4px 0 0 #b0b0b0, 8px -4px 0 0 #a0a0a0;
+            animation: p2-flap 0.25s steps(2) infinite;
+            z-index: 10;
+        }
+        #scene2.visible .pigeon2 .p-wing {
+            animation: p2-flap 0.25s steps(2) 3s infinite, p2-idle 2s ease-in-out 3s infinite;
+        }
+        @keyframes p2-flap {
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-4px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes p2-idle {
+            0%, 100% { transform: translateY(0px); }
+            50%      { transform: translateY(-2px); }
+        }
+        .pigeon2 .p-body {
+            position: absolute; width: 24px; height: 12px; background: #e0e0e0; left: 12px; top: 14px;
+            box-shadow: -4px 0 0 0 #b0b0b0, -4px -4px 0 0 #b0b0b0, 0 -4px 0 0 #d0d0d0, 4px -4px 0 0 #f0f0f0, 8px 0 0 0 #c0c0c0;
+        }
+        .pigeon2 .p-head {
+            position: absolute; width: 40px; height: 12px; background: #d0d0d0; left: 8px; top: 8px;
+            box-shadow: -4px 0 0 0 #b0b0b0, 0 -4px 0 0 #e0e0e0, 4px 0 0 0 #f0f0f0;
+        }
+        .pigeon2 .p-beak { position: absolute; width: 10px; height: 4px; background: #ff9d3c; left: 50px; top: 15px; }
+        .pigeon2 .p-eye  { position: absolute; width: 3px; height: 3px; background: #000; left: 45px; top: 10px; }
+        .pigeon2 .p-tail {
+            position: absolute; width: 12px; height: 8px; background: #b0b0b0; left: -3px; top: 12px;
+            box-shadow: 4px 0 0 0 #a0a0a0, 4px 4px 0 0 #909090;
+        }
+        .pigeon2 .p-leg  { position: absolute; width: 2px; height: 6px; background: #ff8866; left: 20px; top: 26px; }
+        .pigeon2 .p-leg2 { position: absolute; width: 2px; height: 6px; background: #ff8866; left: 24px; top: 26px; }
+        .pigeon2 .p-scroll {
+            position: absolute; width: 5px; height: 8px; background: #f4e4c1; left: 20.5px; top: 22px;
+            border: 1px solid #d4c4a1;
+            box-shadow: 0 2px 0 0 #8b7355, 0 -2px 0 0 #8b7355;
+            z-index: 15;
+            transform: scale(2);
+        }
+        .pigeon2 .p-seal { position: absolute; width: 2px; height: 2px; background: #cc3333; left: 0.5px; top: 3px; }
+
+        #scene2 .cloud { position: absolute; width: 80px; height: 40px; background: white; border-radius: 0; box-shadow: 0 0 0 4px white, 20px -10px 0 0px white, 40px -10px 0 0px white, 60px 0 0 0px white; animation: float-cloud 22s linear infinite; }
+        #scene2 .cloud:nth-child(1) { top: 12%; left: 100%; animation-delay: -2s; opacity: 0.8; }
+        #scene2 .cloud:nth-child(2) { top: 22%; left: 100%; animation-delay: -8s; opacity: 0.7; }
+        #scene2 .cloud:nth-child(3) { top: 8%; left: 100%; animation-delay: -14s; opacity: 0.85; }
+
+        .blur-screen {
+    filter: blur(15px) brightness(1.3);
+    transition: all 1.2s ease-out; /* Slower transition to prevent abrupt change */
+}
+/* Letter modal - 1.5x bigger */
+#letter-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 750px;
+    padding: 30px;
+    background: #1a1428;
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+    border: 3px solid #fff;
+    border-radius: 15px;
+    text-align: center;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Distribute space better */
+    align-items: center;
+    min-height: 200px;
+    overflow: hidden;
+}
+
+/* Adjust text size for mobile */
+@media (max-width: 600px) {
+    #letter-text {
+        font-size: 22px !important;
+        line-height: 1.4;
+    }
+    
+    #letter-buttons button {
+        font-size: 15px !important;
+        padding: 8px 15px;
+    }
+}
+
+/* Typewriter animation */
+#letter-text {
+    font-size: 24px; /* Increased from 15px */
+    line-height: 1.6;
+    text-align: center;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-width: 100%;
+    position: relative;
+    overflow: visible;
+    min-height: 60px;
+    display: block;
+    margin: 0 auto;
+}
+
+.text-line {
+    display: block;
+    height: 24px; /* Fixed height - not min-height */
+    line-height: 24px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+}
+
+/* Add new cursor that's part of the text container */
+#letter-text .cursor {
+    animation: blink 1s step-start infinite;
+    display: inline;
+}
+
+/* Buttons */
+#letter-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around; /* This adds space between buttons */
+    width: 100%;
+    gap: 20px; /* Space between buttons */
+}
+
+#letter-buttons button {
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 20px;
+    cursor: pointer;
+    background: #7bc0c8;
+    border: none;
+    border-radius: 6px;
+    transition: transform 0.1s;
+}
+
+#letter-buttons button:hover {
+    transform: scale(1.1);
+}
+
+/* Typewriter keyframes */
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* Error strike animation for "No" button */
+@keyframes strike {
+    0% { text-decoration: none; }
+    50% { text-decoration: line-through; color: red; }
+    100% { text-decoration: none; }
+}
+
+@keyframes strike {
+    0% { text-decoration: none; color: #fff; }
+    100% { text-decoration: line-through; color: red; }
+}
+
+#letterModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    padding: 15px;
+    background: #1a1428;
+    color: #fff;
+    font-family: monospace;
+    font-size: 10px;
+    border: 2px solid #fff;
+    text-align: center;
+    z-index: 100;   /* Above scene2 */
+    display: none;  /* Hide initially */
+}
+
+#letterModal button {
+    margin: 10px 5px 0 5px;
+    padding: 5px 10px;
+    font-family: monospace;
+    cursor: pointer;
+    background: #6b4a7c;
+    color: #fff;
+    border: none;
+}
+
+#letterModal button:hover {
+    background: #9d5a7c;
+}
+
+#yes-btn, #no-btn {
+    position: absolute;
+    z-index: 20; /* higher than blur overlay */
+    pointer-events: auto;
+}
+
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
+
+/* Shocked maiden animation */
+@keyframes shake-head {
+    0%, 100% { 
+        transform: scale(0.8) rotate(0deg); 
+    }
+    25% { 
+        transform: scale(0.8) rotate(-3deg); 
+    }
+    75% { 
+        transform: scale(0.8) rotate(3deg); 
+    }
+}
+
+.maiden.shocked {
+    animation: shake-head 0.2s ease-in-out 2;
+    animation-delay: 1.5s;
+   
+}
+
+/* Refusal Modal - 1.5x bigger */
+#refusal-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; /* Use percentage */
+    max-width: 450px; /* Maximum for desktop */
+    min-width: 280px; /* Minimum for mobile */
+    padding: 20px;
+    background: #2a1428;
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+    border: 3px solid #ff6666;
+    border-radius: 15px;
+    text-align: center;
+    display: none;
+    z-index: 60;
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+    #refusal-text {
+        font-size: 24px !important;
+        line-height: 1.4;
+    }
+    
+    #close-refusal {
+        font-size: 10px !important;
+        padding: 8px 15px;
+    }
+}
+
+#refusal-text {
+    font-size: 15px;
+    margin-bottom: 22px;
+    color: #ffcccc;
+    line-height: 1.6;
+}
+
+#close-refusal {
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    background: #ff6666;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    transition: transform 0.2s;
+}
+
+#close-refusal:hover {
+    transform: scale(1.1);
+}
+
+/* Striked button style */
+.striked {
+    text-decoration: line-through !important;
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+    color: #888 !important;
+}
+
+.blinking-cursor {
+    animation: blink 1s step-start infinite;
+    display: inline;
+}
+
+
+#burnt-paper {
+    width: 80%;
+    max-width: 500px;
+    min-height: 400px;
+    background: #f5e9d8;
+    background-image: 
+        radial-gradient(#8b4513 1px, transparent 1px),
+        radial-gradient(#a0522d 1px, transparent 1px);
+    background-size: 20px 20px, 40px 40px;
+    background-position: 0 0, 10px 10px;
+    border: 12px solid transparent;
+    border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%238b4513" stroke-width="8" stroke-dasharray="8,8"/></svg>') 12 stretch;
+    padding: 40px;
+    box-shadow: 
+        0 0 50px rgba(139, 69, 19, 0.5),
+        inset 0 0 30px rgba(139, 69, 19, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Burnt edges effect */
+#burnt-paper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(ellipse at top left, rgba(139, 69, 19, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at top right, rgba(160, 82, 45, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom left, rgba(139, 69, 19, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(160, 82, 45, 0.3) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+#love-letter {
+    font-family: 'Dancing Script', cursive;
+    font-size: 22px;
+    line-height: 1.8;
+    color: #5d4037;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    animation: fadeInLetter 2s ease-out;
+}
+
+@keyframes fadeInLetter {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll hand-off animation */
+@keyframes scroll-to-maiden {
+    0% { 
+        transform: translate(0, 0) rotate(0deg) scale(2);
+    }
+    100% { 
+        transform: translate(60px, 30px) rotate(90deg) scale(2);
+    }
+}
+
+.scroll-flying {
+    animation: scroll-to-maiden 2s cubic-bezier(0.4, 0.2, 0.2, 1) forwards !important;
+    position: absolute !important;
+    z-index: 1000 !important;
+}
+
+.maiden.reaching .m-hand-r {
+    animation: hand-reach 0.5s ease-out 1.2s;
+}
+
+@keyframes hand-reach {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(3px) translateY(-2px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes maiden-reach {
+    0% {
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(0.85) translateX(2px);
+    }
+    100% {
+        transform: scale(0.8);
+    }
+}
+
+/* Gentle nod animation instead of bounce */
+.maiden-receiving {
+    animation: gentle-nod 1s ease-in-out;
+}
+
+@keyframes gentle-nod {
+    0% { transform: scale(0.8); }
+    30% { transform: scale(0.85) translateY(-2px); }
+    60% { transform: scale(0.82) translateY(1px); }
+    100% { transform: scale(0.8); }
+}
+
+.exclamation-mark {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    color: #ff3333;
+    text-shadow: 1px 1px 0 #000, 0 0 5px rgba(255, 50, 50, 0.8);
+    z-index: 25;
+    opacity: 0;
+    scale: 1.5;
+}
+
+.exclamation-mark.show {
+    animation: pop-exclamation 0.1s ease-out forwards;
+    animation-delay: 1.2s;
+}
+
+@keyframes pop-exclamation {
+    0% {
+        transform: translateX(-50%) scale(0);
+        opacity: 0;
+    }
+    70% {
+        transform: translateX(-50%) scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Pixel art exclamation */
+.pixel-exclamation {
+    position: absolute;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    width: 4px;
+    height: 16px;
+    background: #ff3333;
+    z-index: 20;
+    animation: pop-exclamation 0.5s ease-out 0.5s forwards;
+}
+
+.pixel-exclamation::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -1px;
+    width: 6px;
+    height: 6px;
+    background: #ff3333;
+}
+
+.pixel-exclamation::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: -1px;
+    width: 6px;
+    height: 4px;
+    background: #ff3333;
+}
+
+        /* === PERFORMANCE OPTIMIZATIONS === */
+        /* Enable hardware acceleration */
+        #scene1, #scene2 {
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -ms-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-perspective: 1000;
+            -moz-perspective: 1000;
+            -ms-perspective: 1000;
+            perspective: 1000;
+        }
+        
+        /* Reduce repaints on animated elements */
+        .cloud, .wind, .wave, .pigeon, .pigeon2, .breath-wave {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        
+        /* Optimize the modal for mobile */
+        @media (max-width: 600px) {
+            #letter-modal {
+                width: 95vw !important;
+                max-width: 95vw !important;
+                padding: 20px !important;
+            }
+        }
+
+        /* =============================== */
+/* MOBILE CASTLE POSITION FIX */
+/* =============================== */
+
+@media (max-width: 768px) {
+    /* Bring castle on screen and raise it */
+    .tower-wrap {
+        bottom: 100vh !important; /* Higher position */
+        right: -650px !important; /* Bring it on screen (less negative) */
+        transform: scale(1.8) !important; /* Adjust size */
+        width: 600px !important; /* Adjust width */
+    }
+    
+    /* Adjust pigeon position */
+    .pigeon2 {
+        right: 120px !important; /* Move pigeon left */
+        bottom: calc(45vh + 180px) !important; /* Match castle height */
+    }
+    
+    /* Adjust tap hint */
+    #tap-window-hint {
+        right: 200px !important;
+        bottom: calc(45vh + 200px) !important;
+        font-size: 14px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .tower-wrap {
+        bottom: 40vh !important; /* Even higher */
+        right: -500px !important; /* More on screen */
+        transform: scale(1) !important;
+        width: 500px !important;
+    }
+    
+    .pigeon2 {
+        right: 60px !important;
+        bottom: calc(40vh + 120px) !important;
+    }
+    
+    #tap-window-hint {
+        right: 40px !important;
+        bottom: calc(40vh + 80px) !important;
+        font-size: 12px !important;
+    }
+}
+
+/* Add this to your existing CSS - simple scroll received animation */
+.scroll-received {
+    animation: gentle-nod 1.2s ease-in-out;
+}
+
+@keyframes gentle-nod {
+    0% { transform: scale(0.8); }
+    30% { transform: scale(0.85) translateY(-2px); }
+    60% { transform: scale(0.82) translateY(1px); }
+    100% { transform: scale(0.8); }
+}
+
+/* Add this to your CSS */
+#scene2 {
+    transition: filter 1.5s ease-out !important;
+}
+
+.heavy-blur {
+    filter: blur(25px) brightness(1.6) !important;
+}
+
+#scene2.fade-out {
+    animation: fadeToBlack 2s ease-out forwards;
+}
+
+@keyframes fadeToBlack {
+    0% {
+        opacity: 1;
+        filter: blur(0px) brightness(1);
+    }
+    10% {
+        opacity: 0.9;  /* Slow start */
+    }
+    30% {
+        opacity: 0.7;  /* Faster drop */
+    }
+    50% {
+        opacity: 0.4;  /* Fastest drop in middle */
+    }
+    70% {
+        opacity: 0.2;  /* Slowing down */
+    }
+    85% {
+        opacity: 0.1;  /* Very slow at end */
+    }
+    100% {
+        opacity: 0;
+        filter: blur(25px) brightness(2.0);
+        visibility: hidden;
+    }
+}
+        
+        /* ==================== */
+/* FINAL SCENE - CLEAN VERSION */
+/* ==================== */
+
+/* Final scene container */
+#final-scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    overflow: visible;
+}
+
+#final-scene.active {
+    display: flex !important;
+    pointer-events: auto;
+}
+
+#final-scene.fade-in {
+    animation: fadeFromBlack 2s ease-out forwards;
+}
+
+@keyframes fadeFromBlack {
+    0% {
+        opacity: 0;
+        background: rgba(0, 0, 0, 0);
+    }
+    40% {
+        opacity: 0.4;
+        background: rgba(0, 0, 0, 0.4);
+    }
+    70% {
+        opacity: 0.8;
+        background: rgba(0, 0, 0, 0.8);
+    }
+    100% {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.95);
+    }
+}
+
+/* Credits container - FIXED POSITIONING */
+#end-credits {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+    text-align: center;
+    padding: 20px;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    box-sizing: border-box;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    background-color: transparent !important;
+}
+
+/* Force credits to be completely invisible until animation starts */
+#end-credits,
+#end-credits * {
+    background-color: transparent !important;
+}
+
+#end-credits.start {
+    opacity: 0 !important; /* Start at 0 */
+    visibility: visible !important;
+    animation: scrollCredits 50s linear forwards;
+    transition: opacity 0.5s ease-in !important;
+}
+
+#end-credits.start.fade-in-now {
+    opacity: 1 !important;
+}
+
+@keyframes scrollCredits {
+    0% {
+        top: 100vh;
+        opacity: 1;
+    }
+    100% {
+        top: -2000px;
+        opacity: 1;
+    }
+}
+
+/* Hardware acceleration for credit elements */
+.credit-title, .credit-text, .credit-signature, .credit-final {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Credit text styles */
+.credit-title {
+    font-size: 24px;
+    color: #ffff00;
+    margin: 40px 0 20px 0;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+.credit-text {
+    font-size: 18px;
+    line-height: 2;
+    margin: 30px 0;
+    color: #ffffff;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.credit-signature {
+    font-size: 20px;
+    color: #ff6b6b;
+    margin: 50px 0;
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+.credit-final {
+    font-size: 28px;
+    color: #4ecdc4;
+    margin: 60px 0;
+    text-shadow: 0 0 15px rgba(78, 205, 196, 0.7);
+}
+
+/* MOBILE FIXES - CREDITS START FAST AND CENTERED */
+@media (max-width: 768px) {    
+    #end-credits {
+        max-width: 95%;
+        padding: 15px;
+    }
+    
+    .credit-title {
+        font-size: 20px !important;
+    }
+    
+    .credit-text {
+        font-size: 16px !important;
+        line-height: 1.8 !important;
+    }
+    
+    .credit-signature {
+        font-size: 18px !important;
+    }
+    
+    .credit-final {
+        font-size: 24px !important;
+    }
+    
+    @keyframes scrollCredits {
+        0% {
+            top: 100vh;
+            opacity: 1;
+        }
+        100% {
+            top: -2500px;
+            opacity: 1;
+        }
+    }
+}
+
+/* TOP FADE - COMPLETELY SEPARATE */
+#final-scene::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 200px;
+    z-index: 999999;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.5s ease-in, visibility 0s linear 1.5s;
+    background: linear-gradient(to bottom, 
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 20%,
+        rgba(0,0,0,0.7) 50%,
+        rgba(0,0,0,0.3) 80%,
+        rgba(0,0,0,0) 100%
+    );
+}
+
+/* BOTTOM FADE - COMPLETELY SEPARATE */
+#final-scene::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 200px;
+    z-index: 999999;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.5s ease-in, visibility 0s linear 1.5s;
+    background: linear-gradient(to top, 
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 20%,
+        rgba(0,0,0,0.7) 50%,
+        rgba(0,0,0,0.3) 80%,
+        rgba(0,0,0,0) 100%
+    );
+}
+
+/* SHOW BOTH WHEN ACTIVE */
+#final-scene.active.fade-in::before,
+#final-scene.active.fade-in::after {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1.5s ease-in, visibility 0s linear 0s;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    #final-scene::before,
+    #final-scene::after {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    #final-scene::before,
+    #final-scene::after {
+        height: 120px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div id="scene1">
+        <div id="tap-overlay"><div class="tap-text">TAP TO PROCEED</div></div>
+        <div class="wind"></div>
+        <div class="wind"></div>
+        <div class="wind"></div>
+        <div class="wind"></div>
+        <div class="wind"></div>
+        <div class="clouds"><div class="cloud"></div><div class="cloud"></div><div class="cloud"></div><div class="cloud"></div></div>
+        <div class="waves"></div>
+        <div class="waves"><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div></div>
+        <div class="pigeon">
+            <div class="pigeon-head"></div><div class="pigeon-beak"></div><div class="pigeon-eye"></div>
+            <div class="pigeon-body"></div><div class="pigeon-wing"></div><div class="pigeon-tail"></div>
+            <div class="pigeon-leg"></div><div class="pigeon-leg"></div>
+            <div class="pigeon-scroll"><div class="scroll-seal"></div></div>
+        </div>
+    </div>
+    <div id="blur-overlay"></div>
+    <div id="scene2">
+        <div id="letter-modal" style="display: none;">
+    <div id="letter-text"></div>
+    <div id="letter-buttons">
+        <button id="btn-yes">Yes</button>
+        <button id="btn-no">No</button>
+    </div>
+</div>
+
+        <!-- Refusal Modal -->
+        <div id="refusal-modal">
+            <div id="refusal-text">He can't take no for an answer</div>
+            <button id="close-refusal">CLOSE</button>
+        </div>
+
+        <div class="cloud"></div><div class="cloud"></div><div class="cloud"></div>
+        <div class="ocean"><div class="breath-wave"></div><div class="breath-wave"></div><div class="breath-wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div></div>
+        <div class="island">
+            <div class="island-oval">
+                <div class="island-row"></div><div class="island-row"></div><div class="island-row"></div><div class="island-row"></div><div class="island-row"></div>
+                <div class="island-row"></div><div class="island-row"></div><div class="island-row"></div><div class="island-row"></div><div class="island-row"></div>
+                <div class="island-boulder"></div><div class="island-boulder"></div><div class="island-boulder"></div><div class="island-boulder"></div>
+                <div class="island-boulder"></div><div class="island-boulder"></div><div class="island-boulder"></div><div class="island-boulder"></div>
+                <div class="island-boulder"></div><div class="island-boulder"></div><div class="island-boulder"></div><div class="island-boulder"></div>
+                <div class="island-boulder"></div><div class="island-boulder"></div>
+            </div>
+            <div class="island-green-top"></div>
+            <div class="island-dirt"></div><div class="island-dirt"></div><div class="island-dirt"></div><div class="island-dirt"></div><div class="island-dirt"></div>
+            <div class="island-dirt"></div><div class="island-dirt"></div><div class="island-dirt"></div><div class="island-dirt"></div><div class="island-dirt"></div>
+            <div class="island-moss"></div><div class="island-moss"></div><div class="island-moss"></div>
+        </div>
+
+        <!-- Dark Castle Tower - SCALED 2.5x -->
+        <div class="tower-wrap">
+            <div class="tower-spire tall"></div>
+            <div class="tower-spire"></div>
+            <div class="tower-spire tall"></div>
+            <div class="tower-spire"></div>
+            <div class="tower-spire tall"></div>
+            <div class="spire-cap"></div>
+            <div class="spire-cap"></div>
+            <div class="spire-cap"></div>
+            <div class="spire-cap"></div>
+            <div class="spire-cap"></div>
+
+            <div class="tower-upper"></div>
+            <div class="tower-body"></div>
+            <div class="tower-turret-left"></div>
+            <div class="tower-turret-right"></div>
+            <div class="tower-base"></div>
+
+            <div class="tower-window"></div>
+            <div class="tower-window"></div>
+            <div class="tower-window"></div>
+            <div class="tower-window"></div>
+            <div class="tower-window"></div>
+            <div class="tower-window"></div>
+            <div class="tower-window"></div>
+            <div class="tower-window"></div>
+            <div class="tower-window"></div>
+            <div class="tower-window"></div>
+
+            <div class="tower-window-main" id="towerWindow">
+                <div class="pane-left"></div>
+                <div class="pane-right"></div>
+                <div class="exclamation-mark" style="display: none;">!</div>
+                <div class="maiden-wrap">
+                    <div class="maiden-bg"></div>
+                    <div class="maiden">
+                        <div class="m-hair-top"></div>
+                        <div class="m-hair-mid"></div>
+                        <div class="m-hair-wide"></div>
+                        <div class="m-braid-l1"></div>
+                        <div class="m-braid-l2"></div>
+                        <div class="m-braid-l3"></div>
+                        <div class="m-braid-l4"></div>
+                        <div class="m-braid-l5"></div>
+                        <div class="m-braid-r1"></div>
+                        <div class="m-braid-r2"></div>
+                        <div class="m-braid-r3"></div>
+                        <div class="m-braid-r4"></div>
+                        <div class="m-braid-r5"></div>
+                        <div class="m-braid-r6"></div>
+                        <div class="m-braid-r7"></div>
+                        <div class="m-tiara-band1"></div>
+                        <div class="m-tiara-band2"></div>
+                        <div class="m-tiara-band3"></div>
+                        <div class="m-tiara-band4"></div>
+                        <div class="m-tiara-gold1"></div>
+                        <div class="m-tiara-gold2"></div>
+                        <div class="m-tiara-gold3"></div>
+                        <div class="m-tiara-gold4"></div>
+                        <div class="m-tiara-jewel"></div>
+                        <div class="m-face"></div>
+                        <div class="m-eye-l"></div>
+                        <div class="m-eye-r"></div>
+                        <div class="m-blush-l"></div>
+                        <div class="m-blush-r"></div>
+                        <div class="m-mouth"></div>
+                        <div class="m-earring-l"></div>
+                        <div class="m-earring-r"></div>
+                        <div class="m-neck"></div>
+                        <div class="m-choker"></div>
+                        <div class="m-dress-top"></div>
+                        <div class="m-dress"></div>
+                        <div class="m-dress-center"></div>
+                        <div class="m-arm-l"></div>
+                        <div class="m-arm-r"></div>
+                        <div class="m-hand-l"></div>
+                        <div class="m-hand-r"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pigeon2">
+            <div class="p-tail"></div>
+            <div class="p-body"></div>
+            <div class="p-wing"></div>
+            <div class="p-head"></div>
+            <div class="p-beak"></div>
+            <div class="p-eye"></div>
+            <div class="p-leg"></div>
+            <div class="p-leg2"></div>
+            <div class="p-scroll"><div class="p-seal"></div></div>
+        </div>
+
+        <div id="tap-window-hint">TAP WINDOW</div>
+</div>
+<div id="final-scene">
+            <div id="end-credits">
+                <div class="credit-title">TO MY DEAREST MAIDEN</div>
+        
+                <div class="credit-text">
+            Through pixelated seas and digital skies,<br>
+            This humble messenger before you flies.<br>
+            Not just a bird, but my heart's true carrier,<br>
+            Bringing words that make my soul less wearier.
+                </div>
+        
+                <div class="credit-text">
+            In this realm of code, where ones and zeros play,<br>
+            You are the sunshine that brightens my day.<br>
+            Your laughter echoes in my memory's halls,<br>
+            A melody that through my being calls.
+                </div>
+        
+                <div class="credit-text">
+            Though towers may rise and oceans may part,<br>
+            You remain the beat within my heart.<br>
+            No distance too great, no challenge too tall,<br>
+            For you, my love, I would conquer all.
+                </div>
+        
+                <div class="credit-signature">
+            Forever Yours,<br>
+            Your Devoted Knight
+                </div>
+        
+                <div class="credit-final">
+            THE END
+                </div>
+            </div>
+    </div>
+    <script>
+// Performance optimization: Throttle animations and events
+let lastTime = 0;
+const throttle = (callback, limit) => {
+    return (...args) => {
+        const now = Date.now();
+        if (now - lastTime >= limit) {
+            callback(...args);
+            lastTime = now;
+        }
+    };
+};
+
+// Detect mobile for performance adjustments
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+// Reduce animation complexity on mobile
+if (isMobile) {
+    // Reduce number of animated elements
+    document.addEventListener('DOMContentLoaded', () => {
+        const extraWinds = document.querySelectorAll('.wind:nth-child(n+4)');
+        extraWinds.forEach(w => w.style.display = 'none');
+        
+        const extraWaves = document.querySelectorAll('#scene2 .wave:nth-child(n+7)');
+        extraWaves.forEach(w => w.style.display = 'none');
+        
+        const extraClouds = document.querySelectorAll('.cloud:nth-child(n+5)');
+        extraClouds.forEach(c => c.style.display = 'none');
+    });
+}
+
+const overlay        = document.getElementById('tap-overlay');
+const scene          = document.getElementById('scene1');
+const scene2         = document.getElementById('scene2');
+const blurOverlay    = document.getElementById('blur-overlay');
+const towerWindow    = document.getElementById('towerWindow');
+const tapHint        = document.getElementById('tap-window-hint');
+const pigeon2        = document.querySelector('.pigeon2');
+
+setTimeout(() => { overlay.classList.add('show'); }, 2000);
+
+// Use requestAnimationFrame for better performance
+const optimizedClick = throttle(() => {
+    overlay.classList.remove('show');
+    scene.classList.add('departing');
+    setTimeout(() => { scene.classList.add('fast-wind'); }, 400);
+    setTimeout(() => {
+        scene2.classList.add('visible');
+        scene2.classList.add('rush');
+    }, 2200);
+    setTimeout(() => {
+        scene.style.display   = 'none';
+        blurOverlay.style.display = 'none';
+    }, 4000);
+
+    setTimeout(() => {
+    // Only show the hint if the window hasn't been opened yet
+    if (!windowAlreadyOpened) {
+        tapHint.classList.add('show');
+    }
+}, 7400);
+}, 100);
+
+overlay.addEventListener('click', optimizedClick);
+
+let windowAlreadyOpened = false;
+
+function openWindow() {
+    if (windowAlreadyOpened) return;
+    windowAlreadyOpened = true;
+
+    // Hide the hint permanently
+    tapHint.classList.remove('show');
+
+    pigeon2.classList.add('pecking');
+    setTimeout(() => {
+        towerWindow.classList.add('open');
+
+        // Add shocked animation to maiden
+        const maiden = document.querySelector('.maiden');
+        if (maiden) maiden.classList.add('shocked');
+        
+        // Show exclamation mark
+        const exclamation = document.querySelector('.exclamation-mark');
+        exclamation.style.display = 'block';
+        exclamation.classList.add('show');
+        
+        // Hide exclamation after 2 seconds
+        setTimeout(() => {
+            exclamation.classList.remove('show');
+            setTimeout(() => {
+                exclamation.style.display = 'none';
+            }, 500);
+        }, 2000);
+
+        // Show the letter modal 1 second after window opens
+        setTimeout(() => {
+            showLetterModal();
+        }, 1000);
+
+    }, 600);
+}
+
+// Optimize touch events
+const optimizedOpenWindow = throttle(openWindow, 300);
+tapHint.addEventListener('click', optimizedOpenWindow);
+towerWindow.addEventListener('click', optimizedOpenWindow);
+
+function showLetterModal() {
+    // Blur the scene when modal appears
+
+    const modal = document.getElementById('letter-modal');
+    const letterText = document.getElementById('letter-text');
+    const buttons = document.getElementById('letter-buttons');
+
+    letterText.textContent = "";      // reset text
+    buttons.style.display = "none";   // hide buttons initially
+
+    // Show modal 1 second after window click
+    setTimeout(() => {
+        modal.style.display = "flex";
+
+        const message = `You Have Received A Letter From Your Beloved,
+Would You Accept?`;
+        let i = 0;
+        const speed = isMobile ? 80 : 150; // Faster on mobile
+
+        function typeWriter() {
+    if (i < message.length) {
+        // Use requestAnimationFrame for smoother typing
+        requestAnimationFrame(() => {
+            const textSoFar = message.substring(0, i);
+            letterText.innerHTML = textSoFar.replace(/\n/g, '<br>');
+            
+            setTimeout(() => {
+                letterText.innerHTML = textSoFar.replace(/\n/g,'<br>') + '|';
+                setTimeout(() => {
+                    i++;
+                    if (i <= message.length) {
+                        typeWriter();
+                    }
+                }, 20); // Faster typing
+            }, 50);
+        });
+    } else {
+        // When done, show full message with blinking cursor
+        letterText.innerHTML = message.replace(/\n/g, '<br>') + '<span class="blinking-cursor">|</span>';
+        buttons.style.display = "flex";
+    }
+}
+        typeWriter();
+    }, 1000);
+
+   // YES button - MOBILE FIX VERSION
+document.getElementById('btn-yes').onclick = () => {
+    console.log('YES button clicked - starting sequence');
+    
+    // 1. Hide the letter modal - COMPLETELY
+const letterModal = document.getElementById('letter-modal');
+if (letterModal) {
+    letterModal.style.display = 'none';
+}
+    
+    // 2. Add blur with slower transition
+    scene2.classList.add('blur-screen');
+    
+    // Force a reflow to ensure styles are applied
+    void scene2.offsetWidth;
+    
+    // 3. Get the scroll element
+    const originalScroll = document.querySelector('.pigeon2 .p-scroll');
+    if (originalScroll) {
+        console.log('Starting scroll animation');
+        
+        // Make maiden reach out
+        const maiden = document.querySelector('.maiden');
+        if (maiden) {
+            maiden.classList.add('reaching');
+        }
+        
+        // Add flying animation to the scroll
+        originalScroll.style.position = 'absolute';
+        originalScroll.style.zIndex = '1000';
+        originalScroll.classList.add('scroll-flying');
+        
+        // 4. Wait for scroll to reach maiden
+        setTimeout(() => {
+            console.log('Scroll reached maiden');
+            
+            // Make scroll semi-transparent at maiden's hand
+            if (originalScroll) {
+                originalScroll.style.opacity = '1';
+            }
+            
+            // Make maiden hold the scroll
+            if (maiden) {
+                maiden.classList.remove('reaching');
+                
+                // Quick gentle nod
+                setTimeout(() => {
+                    if (maiden) {
+                        maiden.style.transform = 'scale(0.85) translateY(-2px)';
+                        setTimeout(() => {
+                            maiden.style.transform = 'scale(0.8)';
+                        }, 200);
+                    }
+                }, 100);
+            }
+            
+            // 5. Start fade transition
+            setTimeout(() => {
+                console.log('Starting fade-out transition');
+                
+                // Add fade-out animation to scene2
+                scene2.classList.add('fade-out');
+                
+                // Wait for scene2 to partially fade, THEN show final scene
+                setTimeout(() => {
+                    console.log('Showing final scene');
+                    
+                    // Activate and fade in final scene
+                    const finalScene = document.getElementById('final-scene');
+                    finalScene.classList.add('active');
+                    
+                    // Start fade-in
+setTimeout(() => {
+    finalScene.classList.add('fade-in');
+    
+    // Start credits ONLY after scene2 is fully faded out
+setTimeout(() => {
+    const credits = document.getElementById('end-credits');
+    credits.classList.add('start');
+    setTimeout(() => {
+        credits.classList.add('fade-in-now');
+    }, 50); // Tiny delay to trigger transition
+    console.log('Credits started');
+}, 500); // Wait 2 seconds for scene2 fade-out to complete
+    
+}, 300);
+                    
+                }, 600);
+                
+            }, 1200);
+            
+        }, 1000);
+    }
+}
+
+        
+    // NO button - shows refusal modal
+    document.getElementById('btn-no').onclick = () => {
+        showRefusalModal();
+    }
+}
+
+function showRefusalModal() {
+    const refusalModal = document.getElementById('refusal-modal');
+    const closeBtn = document.getElementById('close-refusal');
+    
+    refusalModal.style.display = 'flex';
+
+    closeBtn.onclick = () => {
+        refusalModal.style.display = 'none';
+        
+        // Strike through the NO button
+        const btnNo = document.getElementById('btn-no');
+        btnNo.classList.add('striked');
+        
+        // Remove shocked animation from maiden
+        const maiden = document.querySelector('.maiden');
+        if (maiden) maiden.classList.remove('shocked');
+    };
+}
+
+// Prevent mobile zoom and touch gestures
+document.addEventListener('touchmove', (e) => {
+    if (e.scale !== 1) e.preventDefault();
+}, { passive: false });
+
+// Optimize for mobile
+if (isMobile) {
+    // Reduce some animations
+    document.documentElement.style.setProperty('--speed-multiplier', '0.8');
+    
+    // Prevent default touch actions
+    document.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+}
+
+    </script>
+</body>
+</html>
