@@ -1608,7 +1608,7 @@
     }
 }
 
-/* TOP FADE - COMPLETELY SEPARATE */
+/* VIGNETTE - FINAL FIX */
 #final-scene::before {
     content: '';
     position: fixed;
@@ -1628,53 +1628,51 @@
         rgba(0,0,0,0.7) 50%,
         rgba(0,0,0,0.3) 80%,
         rgba(0,0,0,0) 100%
-    );
+    ) !important;
 }
 
-/* BOTTOM FADE - COMPLETELY SEPARATE */
 #final-scene::after {
     content: '';
     position: fixed;
-    bottom: 0;
-    top: auto;
-    left: 0;
-    right: 0;
-    width: 100vw;
-    height: 200px;
-    z-index: 999999;
-    pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 1.5s ease-in, visibility 0s linear 1.5s;
+    bottom: 0 !important;
+    top: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    height: 200px !important;
+    z-index: 999999 !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 1.5s ease-in, visibility 0s linear 1.5s !important;
     background: linear-gradient(to top, 
         rgba(0,0,0,1) 0%,
         rgba(0,0,0,0.9) 20%,
         rgba(0,0,0,0.7) 50%,
         rgba(0,0,0,0.3) 80%,
         rgba(0,0,0,0) 100%
-    );
+    ) !important;
 }
 
-/* SHOW BOTH WHEN ACTIVE */
 #final-scene.active.fade-in::before,
 #final-scene.active.fade-in::after {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 1.5s ease-in, visibility 0s linear 0s;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: opacity 1.5s ease-in, visibility 0s linear 0s !important;
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
     #final-scene::before,
     #final-scene::after {
-        height: 150px;
+        height: 150px !important;
     }
 }
 
 @media (max-width: 480px) {
     #final-scene::before,
     #final-scene::after {
-        height: 120px;
+        height: 120px !important;
     }
 }
 
@@ -2155,4 +2153,5 @@ if (isMobile) {
 
     </script>
 </body>
+
 </html>
