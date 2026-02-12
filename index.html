@@ -248,7 +248,6 @@
             0%, 100% { opacity: 0.4; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.05); }
         }
-        @media (max-width: 600px) { .tap-text { font-size: 24px; } }
 
         /* ======================== */
         /* SCENE 2: ISLAND & TOWER  */
@@ -437,7 +436,7 @@
         /* ======================== */
         .tower-wrap {
             position: absolute;
-            bottom: calc(88vh - 22px);
+            bottom: calc(88vh - 30px);
             right: -700px;
             width: 700px;  /* 280 * 2.5 */
             z-index: 7;
@@ -912,18 +911,6 @@
     overflow: hidden;
 }
 
-/* Adjust text size for mobile */
-@media (max-width: 600px) {
-    #letter-text {
-        font-size: 22px !important;
-        line-height: 1.4;
-    }
-    
-    #letter-buttons button {
-        font-size: 15px !important;
-        padding: 8px 15px;
-    }
-}
 
 /* Typewriter animation */
 #letter-text {
@@ -1080,17 +1067,6 @@
     box-sizing: border-box;
 }
 
-@media (max-width: 600px) {
-    #refusal-text {
-        font-size: 24px !important;
-        line-height: 1.4;
-    }
-    
-    #close-refusal {
-        font-size: 10px !important;
-        padding: 8px 15px;
-    }
-}
 
 #refusal-text {
     font-size: 15px;
@@ -1183,7 +1159,7 @@
         transform: translate(0, 0) rotate(0deg) scale(2);
     }
     100% { 
-        transform: translate(60px, 30px) rotate(90deg) scale(2);
+        transform: translate(50px, 10px) rotate(90deg) scale(2);
     }
 }
 
@@ -1324,61 +1300,6 @@
             transform: translateZ(0);
         }
         
-        /* Optimize the modal for mobile */
-        @media (max-width: 600px) {
-            #letter-modal {
-                width: 95vw !important;
-                max-width: 95vw !important;
-                padding: 20px !important;
-            }
-        }
-
-        /* =============================== */
-/* MOBILE CASTLE POSITION FIX */
-/* =============================== */
-
-@media (max-width: 768px) {
-    /* Bring castle on screen and raise it */
-    .tower-wrap {
-        bottom: 100vh !important; /* Higher position */
-        right: -650px !important; /* Bring it on screen (less negative) */
-        transform: scale(1.8) !important; /* Adjust size */
-        width: 600px !important; /* Adjust width */
-    }
-    
-    /* Adjust pigeon position */
-    .pigeon2 {
-        right: 120px !important; /* Move pigeon left */
-        bottom: calc(45vh + 180px) !important; /* Match castle height */
-    }
-    
-    /* Adjust tap hint */
-    #tap-window-hint {
-        right: 200px !important;
-        bottom: calc(45vh + 200px) !important;
-        font-size: 14px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .tower-wrap {
-        bottom: 40vh !important; /* Even higher */
-        right: -500px !important; /* More on screen */
-        transform: scale(1) !important;
-        width: 500px !important;
-    }
-    
-    .pigeon2 {
-        right: 60px !important;
-        bottom: calc(40vh + 120px) !important;
-    }
-    
-    #tap-window-hint {
-        right: 40px !important;
-        bottom: calc(40vh + 80px) !important;
-        font-size: 12px !important;
-    }
-}
 
 /* Add this to your existing CSS - simple scroll received animation */
 .scroll-received {
@@ -1572,41 +1493,7 @@
     text-shadow: 0 0 15px rgba(78, 205, 196, 0.7);
 }
 
-/* MOBILE FIXES - CREDITS START FAST AND CENTERED */
-@media (max-width: 768px) {    
-    #end-credits {
-        max-width: 95%;
-        padding: 15px;
-    }
-    
-    .credit-title {
-        font-size: 20px !important;
-    }
-    
-    .credit-text {
-        font-size: 16px !important;
-        line-height: 1.8 !important;
-    }
-    
-    .credit-signature {
-        font-size: 18px !important;
-    }
-    
-    .credit-final {
-        font-size: 24px !important;
-    }
-    
-    @keyframes scrollCredits {
-        0% {
-            top: 100vh;
-            opacity: 1;
-        }
-        100% {
-            top: -2500px;
-            opacity: 1;
-        }
-    }
-}
+
 
 /* TOP FADE */
 #final-scene::before {
@@ -1635,7 +1522,7 @@
 #final-scene::after {
     content: '';
     position: fixed;
-    top: 800px;
+    bottom: 0px;
     left: 0;
     right: 0;
     width: 100vw;
@@ -1663,21 +1550,6 @@
     transition: opacity 1.5s ease-in, visibility 0s linear 0s;
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
-    #final-scene::before,
-    #final-scene::after {
-        height: 150px;
-    }
-}
-
-@media (max-width: 480px) {
-    #final-scene::before,
-    #final-scene::after {
-        top: 50px;
-        height: 120px;
-    }
-}
 
 /* POST-CREDITS BUTTONS */
 #post-credits-buttons {
@@ -1804,24 +1676,263 @@
     background: #ff6666 !important;
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
-    .credit-btn {
-        font-size: 10px;
-        padding: 12px 15px;
-        margin: 0 8px;
-    }
-    
-    .composer-content h2 {
-        font-size: 14px;
-    }
-    
-    #her-letter {
-        font-size: 10px;
-        height: 150px;
+/* ==================== */
+/* RESPONSIVE ROOT SETUP - ONE SYSTEM TO RULE THEM ALL */
+/* ==================== */
+
+:root {
+    /* Base sizes - YOUR PERFECT LAPTOP VALUES */
+    --castle-right: -700px;
+    --castle-bottom: calc(88vh - 30px);
+    --castle-scale: 1.5;
+    --castle-width: 700px;
+    --pigeon-right: 120px;
+    --pigeon-bottom: calc(35vh + 215px);
+    --hint-right: 200px;
+    --hint-bottom: calc(35vh + 215px);
+    --hint-size: 17px;
+    --credit-size: 24px;
+    --credit-text-size: 18px;
+    --fade-height: 200px;
+    --btn-size: 14px;
+    --btn-padding: 15px 25px;
+    --btn-margin: 0 15px;
+    --btn-bottom-start: -200px;
+    --btn-bottom-end: 50%;
+}
+
+/* SMALL LAPTOPS (1000px - 1200px) */
+@media (max-width: 1200px) {
+    :root {
+        --castle-right: -600px;
+        --castle-bottom: 85vh;
+        --castle-scale: 1.4;
+        --castle-width: 650px;
+        --pigeon-right: 100px;
+        --pigeon-bottom: calc(40vh + 180px);
+        --hint-right: 150px;
+        --hint-bottom: calc(40vh + 180px);
+        --hint-size: 16px;
+        --credit-size: 22px;
+        --credit-text-size: 17px;
+        --fade-height: 180px;
+        --btn-size: 13px;
     }
 }
 
+/* TABLETS (768px - 1000px) */
+@media (max-width: 1000px) {
+    :root {
+        --castle-right: -500px;
+        --castle-bottom: 80vh;
+        --castle-scale: 1.3;
+        --castle-width: 600px;
+        --pigeon-right: 80px;
+        --pigeon-bottom: calc(45vh + 150px);
+        --hint-right: 120px;
+        --hint-bottom: calc(45vh + 150px);
+        --hint-size: 15px;
+        --credit-size: 20px;
+        --credit-text-size: 16px;
+        --fade-height: 160px;
+        --btn-size: 12px;
+        --btn-padding: 12px 20px;
+        --btn-margin: 0 12px;
+    }
+}
+
+/* LARGE PHONES (480px - 768px) */
+@media (max-width: 768px) {
+    :root {
+        --castle-right: -400px;
+        --castle-bottom: 75vh;
+        --castle-scale: 1.2;
+        --castle-width: 550px;
+        --pigeon-right: 60px;
+        --pigeon-bottom: calc(50vh + 120px);
+        --hint-right: 80px;
+        --hint-bottom: calc(50vh + 120px);
+        --hint-size: 14px;
+        --credit-size: 18px;
+        --credit-text-size: 14px;
+        --fade-height: 140px;
+        --btn-size: 11px;
+        --btn-padding: 10px 18px;
+        --btn-margin: 0 10px;
+        --btn-bottom-end: 45%;
+    }
+    
+    /* Stack buttons vertically on phones */
+    #post-credits-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .credit-btn {
+        width: 80%;
+        margin: 0 !important;
+    }
+}
+
+/* SMALL PHONES (320px - 480px) */
+@media (max-width: 480px) {
+    :root {
+        --castle-right: -300px;
+        --castle-bottom: 70vh;
+        --castle-scale: 1.1;
+        --castle-width: 450px;
+        --pigeon-right: 40px;
+        --pigeon-bottom: calc(55vh + 100px);
+        --hint-right: 50px;
+        --hint-bottom: calc(55vh + 100px);
+        --hint-size: 12px;
+        --credit-size: 16px;
+        --credit-text-size: 12px;
+        --fade-height: 120px;
+        --btn-size: 10px;
+        --btn-padding: 8px 15px;
+        --btn-bottom-end: 40%;
+    }
+    
+    .credit-btn {
+        width: 90%;
+    }
+}
+
+/* iPhone SE and very small */
+@media (max-width: 375px) {
+    :root {
+        --castle-right: -250px;
+        --castle-bottom: 65vh;
+        --castle-width: 400px;
+        --pigeon-right: 30px;
+        --hint-right: 30px;
+        --credit-size: 14px;
+        --credit-text-size: 11px;
+        --fade-height: 100px;
+    }
+}
+
+/* ==================== */
+/* APPLY THE VARIABLES */
+/* ==================== */
+
+/* Castle */
+.tower-wrap {
+    bottom: var(--castle-bottom) !important;
+    right: var(--castle-right) !important;
+    transform: scale(var(--castle-scale)) !important;
+    width: var(--castle-width) !important;
+}
+
+/* Pigeon */
+#scene2.visible .pigeon2 {
+    bottom: var(--pigeon-bottom) !important;
+    right: var(--pigeon-right) !important;
+}
+
+/* Tap hint */
+#tap-window-hint {
+    bottom: var(--hint-bottom) !important;
+    right: var(--hint-right) !important;
+    font-size: var(--hint-size) !important;
+}
+
+/* Credits */
+#end-credits {
+    max-width: min(800px, 90vw) !important;
+}
+
+.credit-title {
+    font-size: var(--credit-size) !important;
+}
+
+.credit-text {
+    font-size: var(--credit-text-size) !important;
+    line-height: 1.8 !important;
+}
+
+.credit-signature {
+    font-size: calc(var(--credit-size) - 2px) !important;
+}
+
+.credit-final {
+    font-size: calc(var(--credit-size) + 4px) !important;
+}
+
+/* Fade */
+#final-scene::before,
+#final-scene::after {
+    height: var(--fade-height) !important;
+}
+
+/* Buttons */
+#post-credits-buttons {
+    bottom: var(--btn-bottom-start) !important;
+}
+
+#post-credits-buttons.show {
+    bottom: var(--btn-bottom-end) !important;
+}
+
+.credit-btn {
+    font-size: var(--btn-size) !important;
+    padding: var(--btn-padding) !important;
+    margin: var(--btn-margin) !important;
+}
+
+/* Letter composer - responsive */
+.composer-content {
+    width: min(600px, 90vw) !important;
+    padding: min(30px, 5vw) !important;
+}
+
+.composer-content h2 {
+    font-size: min(18px, 4vw) !important;
+}
+
+#her-letter {
+    font-size: min(12px, 3.5vw) !important;
+    height: min(200px, 30vh) !important;
+}
+
+.composer-buttons button {
+    font-size: min(12px, 3vw) !important;
+    padding: min(10px, 2vh) min(20px, 4vw) !important;
+}
+
+/* Credits animation speed - faster on mobile */
+#end-credits.start {
+    animation-duration: 50s !important;
+}
+
+@media (max-width: 768px) {
+    #end-credits.start {
+        animation-duration: 40s !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #end-credits.start {
+        animation-duration: 35s !important;
+    }
+}
+
+/* Fix for iPhone notches */
+@supports (padding: max(0px)) {
+    #final-scene::after {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+}
+
+/* Fix 100vh on mobile Safari */
+@supports (-webkit-touch-callout: none) {
+    body, #scene1, #scene2, #final-scene {
+        height: -webkit-fill-available;
+    }
+}
     </style>
 </head>
 <body>
@@ -2325,7 +2436,7 @@ setTimeout(() => {
     // SHOW BUTTONS AFTER CREDITS SCROLL (45s)
     setTimeout(() => {
         document.getElementById('post-credits-buttons').classList.add('show');
-    }, 40000);
+    }, 43000);
     
 }, 500);
 
