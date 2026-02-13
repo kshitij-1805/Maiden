@@ -475,6 +475,11 @@
     transform-origin: center bottom;
 }
 
+#tap-overlay .tap-text {
+    font-size: 25px;
+    transition: all 0.3s ease;
+}
+
 /* RESPONSIVE SCALING - SCALE STAYS 1.5, ONLY X-AXIS ADJUSTS */
 @media (max-width: 1320px) {
     .tower-wrap {
@@ -609,6 +614,9 @@
         transform: scale(1.5);
         width: 360px;
     }
+    #tap-overlay .tap-text {
+        font-size: 22px;
+    }
 }
 
 @media (max-width: 360px) {
@@ -618,7 +626,72 @@
         transform: scale(1.5);
         width: 340px;
     }
+    #tap-overlay .tap-text {
+        font-size: 22px;
+    }
 }
+
+@media (max-width: 	384px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 100px);
+        transform: scale(1.5);
+        width: 340px;
+    }
+    #tap-overlay .tap-text {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 	372px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 97px);
+        transform: scale(1.5);
+        width: 340px;
+    }
+    #tap-overlay .tap-text {
+        font-size: 22px;
+    }
+}
+
+
+@media (max-width: 350px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 85px);
+        transform: scale(1.5);
+        width: 340px;
+    }
+    #tap-overlay .tap-text {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 	337px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 77px);
+        transform: scale(1.5);
+        width: 340px;
+    }
+    #tap-overlay .tap-text {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 	323px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 73px);
+        transform: scale(1.5);
+        width: 340px;
+    }
+    #tap-overlay .tap-text {
+        font-size: 15px;
+    }
+}
+
 
         
 
@@ -2119,6 +2192,131 @@
     }
 }
 
+/* ==================== */
+/* VIDEO LIGHTBOX - FIX FOR IPHONE */
+/* ==================== */
+
+#mixed-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 99999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#lightbox-photo {
+    display: none;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 3px solid #ffd700;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+#lightbox-video {
+    display: none;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 3px solid #ffd700;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+/* Scale down videos on smaller screens */
+@media (max-width: 768px) {
+    #lightbox-video {
+        max-width: 90%;
+        max-height: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    #lightbox-video {
+        max-width: 85%;
+        max-height: 85%;
+    }
+}
+
+@media (max-width: 390px) {
+    #lightbox-video {
+        max-width: 80%;
+        max-height: 80%;
+    }
+}
+
+@media (max-width: 350px) {
+    #lightbox-video {
+        max-width: 75%;
+        max-height: 75%;
+    }
+}
+
+@media (max-width: 320px) {
+    #lightbox-video {
+        max-width: 70%;
+        max-height: 70%;
+    }
+}
+
+#close-mixed-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 20px;
+    padding: 15px 20px;
+    background: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 999999999;
+    transition: transform 0.2s;
+}
+
+#close-mixed-lightbox:hover {
+    transform: scale(1.1);
+    background: #cc0000;
+}
+
+/* iPhone specific fixes */
+@media (max-width: 390px) {
+    #mixed-lightbox {
+        padding: 15px;
+    }
+    #close-mixed-lightbox {
+        top: 10px;
+        right: 10px;
+        font-size: 16px;
+        padding: 12px 16px;
+    }
+}
+
+@media (max-width: 350px) {
+    #mixed-lightbox {
+        padding: 10px;
+    }
+    #close-mixed-lightbox {
+        top: 8px;
+        right: 8px;
+        font-size: 14px;
+        padding: 10px 14px;
+    }
+}
 
 /* ==================== */
 /* SIMPLE RESPONSIVE FIX FOR PHONES */
@@ -2411,6 +2609,144 @@ html, body {
     .composer-buttons button { font-size: 11px; padding: 10px; }
 }
 
+.rotated-video {
+    max-width: 70% !important;
+    max-height: 70% !important;
+}
+
+@media (max-width: 390px) {
+    .rotated-video {
+        max-width: 65% !important;
+        max-height: 65% !important;
+    }
+}
+
+@media (max-width: 350px) {
+    .rotated-video {
+        max-width: 60% !important;
+        max-height: 60% !important;
+    }
+}
+
+
+/* ==================== */
+/* LOVE MESSAGE - FULL SCREEN */
+/* ==================== */
+
+#love-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0a0a14;
+    z-index: 99999999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+#love-message.show {
+    display: flex !important;
+    opacity: 1 !important;
+}
+
+/* Scroll transition animation */
+.scroll-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #ffd700 0%, rgba(255, 215, 0, 0.8) 30%, rgba(255, 215, 0, 0.4) 60%, transparent 100%);
+    z-index: 99999999;
+    pointer-events: none;
+    animation: scroll-glow 1.5s ease-out forwards;
+}
+
+@keyframes scroll-glow {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.5);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+/* ==================== */
+/* LOVE MESSAGE - PIXELATED - CENTERED - CLEAN */
+/* ==================== */
+
+#love-message div:first-child {
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 48px !important;
+    color: #ffd700 !important;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8) !important;
+    margin-bottom: 30px !important;
+    text-align: center !important;
+    line-height: 1.5 !important;
+    width: 100% !important;
+}
+
+#love-message div:last-child {
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 18px !important;
+    color: #fff !important;
+    text-align: center !important;
+    line-height: 2 !important;
+    max-width: 800px !important;
+    padding: 0 20px !important;
+    width: 100% !important;
+}
+
+/* Mobile responsive - PIXELATED - CENTERED */
+@media (max-width: 768px) {
+    #love-message div:first-child {
+        font-size: 36px !important;
+    }
+    #love-message div:last-child {
+        font-size: 16px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #love-message div:first-child {
+        font-size: 28px !important;
+        margin-bottom: 20px !important;
+    }
+    #love-message div:last-child {
+        font-size: 14px !important;
+        line-height: 1.8 !important;
+    }
+}
+
+@media (max-width: 350px) {
+    #love-message div:first-child {
+        font-size: 22px !important;
+    }
+    #love-message div:last-child {
+        font-size: 12px !important;
+    }
+}
+
+/* ==================== */
+/* BACKGROUND MUSIC FADE */
+/* ==================== */
+
+.music-fade {
+    transition: opacity 5s ease;
+}
+
+
     </style>
 </head>
 <body>
@@ -2563,94 +2899,103 @@ html, body {
 </div>
 <div id="final-scene">
     <div id="end-credits">
-        <div class="credit-title">TO MY DEAREST MAIDEN</div>
+        <div class="credit-title">TO MY LOVE</div>
 
         <div class="credit-text">
-            Through pixelated seas and digital skies,<br>
-            This humble messenger before you flies.<br>
-            Not just a bird, but my heart's true carrier,<br>
-            Bringing words that make my soul less wearier.
+            From the hour our paths first crossed,<br>
+            something within me grew certain and still.<br>
+            What began as simple words became laughter,<br>
+            comfort, and a place I had long been seeking.
         </div>
 
         <div class="credit-text">
-            In this realm of code, where ones and zeros play,<br>
-            You are the sunshine that brightens my day.<br>
-            Your laughter echoes in my memory's halls,<br>
-            A melody that through my being calls.
+            Though our days grow busy<br>
+            and the world pulls us in different directions,<br>
+            my heart does not wander.<br>
+            I do not wish to bind thee<br>
+            only to walk beside thee, steady and true.
         </div>
 
         <div class="credit-text">
-            Though towers may rise and oceans may part,<br>
-            You remain the beat within my heart.<br>
-            No distance too great, no challenge too tall,<br>
-            For you, my love, I would conquer all.
+            Know this above all<br>
+            I am here, not from need, but from choice.<br>
+            In closeness and in distance alike,<br>
+            I choose thee. And in all of it, I love thee.
         </div>
 
         <div class="credit-signature">
-            Forever Yours,<br>
-            Your Devoted Knight
-        </div>
-
-        <div class="credit-final">
-            THE END
+            And if thou wishest,<br>
+            there is more of our story waiting beyond this page.
         </div>
     </div>
     
     <!-- POST-CREDITS BUTTONS - SCROLLS FROM BOTTOM TO CENTER -->
     <div id="post-credits-buttons">
-        <button id="memory-lane-btn" class="credit-btn memory-btn">📸 MEMORY LANE</button>
-        <button id="why-btn" class="credit-btn why-btn">💔 why would you</button>
+        <button id="memory-lane-btn" class="credit-btn memory-btn">Go Beyond</button>
+        <button id="why-btn" class="credit-btn why-btn">Close The Scroll</button>
     </div>
 </div>
 
 <!-- MEMORY LANE MODAL - 4 MONTH COLLAGE -->
 <div id="memory-lane-modal" style="display: none;">
     <div class="memory-content">
-        <h2>✨ OUR 4 MONTH JOURNEY ✨</h2>
+        <h2>✨ The Story We Have Become ✨</h2>
         
         <div class="photo-collage">
             <!-- MONTH 1 -->
             <div class="photo-frame">
                 <div class="photo-icon">💖</div>
-                <div class="photo-label">WHEN WE MET</div>
+                <div class="photo-label">Where It Began</div>
             </div>
             
             <!-- MONTH 2 -->
             <div class="photo-frame">
                 <div class="photo-icon">💫</div>
-                <div class="photo-label">FIRST DATE</div>
+                <div class="photo-label">The Way You Shine</div>
             </div>
             
             <!-- MONTH 3 -->
             <div class="photo-frame">
                 <div class="photo-icon">🌹</div>
-                <div class="photo-label">FALLING DEEPER</div>
+                <div class="photo-label">That Night</div>
             </div>
             
             <!-- MONTH 4 -->
             <div class="photo-frame">
                 <div class="photo-icon">💍</div>
-                <div class="photo-label">YOU & ME</div>
+                <div class="photo-label">Close to You</div>
             </div>
             
             <!-- MONTH 5 (placeholder for future) -->
             <div class="photo-frame">
                 <div class="photo-icon">✨</div>
-                <div class="photo-label">MORE TO COME</div>
+                <div class="photo-label">Unscripted</div>
             </div>
             
             <!-- MONTH 6 (placeholder for future) -->
             <div class="photo-frame">
                 <div class="photo-icon">💝</div>
-                <div class="photo-label">FOREVER</div>
-                <div class="photo-date">& BEYOND</div>
+                <div class="photo-label">You.</div>
             </div>
         </div>
         
-        <button id="close-memory-btn">✕ CLOSE MEMORIES</button>
+        <button id="close-memory-btn">✕ CLOSE SCROLL</button>
     </div>
 </div>
 
+<!-- I LOVE YOU MESSAGE - FULL SCREEN - PIXELATED FONT - CENTERED -->
+<div id="love-message" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #0a0a14; z-index: 99999999; flex-direction: column; align-items: center; justify-content: center; opacity: 0; margin: 0; padding: 0;">
+    <div style="font-family: 'Press Start 2P', monospace; font-size: 48px; color: #ffd700; text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); margin-bottom: 30px; text-align: center; line-height: 1.5; width: 100%;">I LOVE YOU</div>
+    <div style="font-family: 'Press Start 2P', monospace; font-size: 18px; color: #fff; text-align: center; line-height: 2; max-width: 800px; padding: 0 20px; width: 100%;">
+        AND I ALWAYS CHOOSE<br>YOU
+    </div>
+</div>
+
+<!-- BACKGROUND MUSIC - UNTIL I FOUND YOU INSTRUMENTAL -->
+<audio id="bg-music" loop preload="auto" style="display: none;">
+    <source src="https://files.catbox.moe/m3j94a.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
 
     <script>
 // Performance optimization: Throttle animations and events
@@ -2701,6 +3046,7 @@ const optimizedClick = throttle(() => {
     setTimeout(() => {
         scene2.classList.add('visible');
         scene2.classList.add('rush');
+        
     }, 2200);
     setTimeout(() => {
         scene.style.display   = 'none';
@@ -2774,7 +3120,7 @@ function showLetterModal() {
     setTimeout(() => {
         modal.style.display = "flex";
 
-        const message = `You Have Received A Letter From Your Beloved,
+        const message = `A Letter From One Who Holds You Dear Has Arrived,
 Would You Accept?`;
         let i = 0;
         const speed = isMobile ? 80 : 150; // Faster on mobile
@@ -2954,7 +3300,9 @@ setTimeout(() => {
     // SHOW BUTTONS AFTER CREDITS SCROLL - PIXEL PERFECT TIMING
     const width = window.innerWidth;
     let buttonDelay = 65000; // default desktop
-        if (width <= 490) buttonDelay = 57050;
+    if (width <= 320) buttonDelay = 73000;
+    else if (width <= 350) buttonDelay = 73000;
+    else if (width <= 490) buttonDelay = 57050;
     else if (width <= 640) buttonDelay = 55000;
     else if (width <= 750) buttonDelay = 53000;
     else if (width <= 828) buttonDelay = 51500;
@@ -2974,39 +3322,131 @@ setTimeout(() => {
     
 }, 500);
 
-// CLOSE MEMORY LANE
-document.getElementById('close-memory-btn').onclick = () => {
-    document.getElementById('memory-lane-modal').style.display = 'none';
-};
 
 // Close modal by clicking outside
 document.getElementById('memory-lane-modal').onclick = (e) => {
     if (e.target === document.getElementById('memory-lane-modal')) {
+        // INSTANTLY HIDE BUTTONS - NO TRANSITION
+        const postButtons = document.getElementById('post-credits-buttons');
+        if (postButtons) {
+            postButtons.style.display = 'none';
+            postButtons.style.visibility = 'hidden';
+            postButtons.style.opacity = '0';
+            postButtons.style.pointerEvents = 'none';
+        }
+        
+        // INSTANTLY HIDE MEMORY LANE BUTTON
+        const memoryBtn = document.getElementById('memory-lane-btn');
+        if (memoryBtn) {
+            memoryBtn.style.display = 'none';
+            memoryBtn.style.visibility = 'hidden';
+        }
+        
+        // INSTANTLY HIDE WHY BUTTON
+        const whyBtn = document.getElementById('why-btn');
+        if (whyBtn) {
+            whyBtn.style.display = 'none';
+            whyBtn.style.visibility = 'hidden';
+        }
+        
+        // INSTANTLY HIDE ALL CREDIT BUTTONS
+        const creditBtns = document.querySelectorAll('.credit-btn');
+        creditBtns.forEach(btn => {
+            btn.style.display = 'none';
+            btn.style.visibility = 'hidden';
+        });
+        
+        // Hide memory lane modal
         document.getElementById('memory-lane-modal').style.display = 'none';
+        
+        // Close any open lightbox and stop videos
+        const lightbox = document.getElementById('mixed-lightbox');
+        if (lightbox) {
+            lightbox.style.display = 'none';
+            const videoEl = document.getElementById('lightbox-video');
+            if (videoEl) {
+                videoEl.pause();
+                videoEl.src = '';
+                videoEl.load();
+            }
+        }
+        
+        // Create golden scroll transition
+        const transition = document.createElement('div');
+        transition.className = 'scroll-transition';
+        document.body.appendChild(transition);
+        
+        // Wait for transition to peak
+        setTimeout(() => {
+            // Remove transition
+            transition.remove();
+            
+            // HIDE SCENE 2 COMPLETELY
+            const scene2 = document.getElementById('scene2');
+            scene2.style.opacity = '0';
+            scene2.style.pointerEvents = 'none';
+            scene2.style.display = 'none';
+            
+            // HIDE FINAL SCENE COMPLETELY
+            const finalScene = document.getElementById('final-scene');
+            finalScene.style.opacity = '0';
+            finalScene.style.pointerEvents = 'none';
+            finalScene.style.display = 'none';
+            
+            // HIDE END CREDITS
+            const endCredits = document.getElementById('end-credits');
+            if (endCredits) {
+                endCredits.style.opacity = '0';
+                endCredits.style.display = 'none';
+            }
+            
+            // HIDE ANY OTHER MODALS
+            const letterModal = document.getElementById('letter-modal');
+            if (letterModal) letterModal.style.display = 'none';
+            
+            const refusalModal = document.getElementById('refusal-modal');
+            if (refusalModal) refusalModal.style.display = 'none';
+            
+            // Show full screen love message with PIXELATED FONT
+            const loveMsg = document.getElementById('love-message');
+            loveMsg.style.display = 'flex';
+            loveMsg.style.opacity = '0';
+            
+            setTimeout(() => {
+                loveMsg.style.transition = 'opacity 1.5s ease';
+                loveMsg.style.opacity = '1';
+            }, 50);
+            
+            // Keep message for 7 seconds, then close website
+            setTimeout(() => {
+                // Fade out
+                loveMsg.style.transition = 'opacity 1s ease';
+                loveMsg.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Close the website/tab
+                    window.close();
+                    
+                    // Fallback if window.close() is blocked
+                    document.body.innerHTML = '';
+                    document.body.style.background = '#0a0a14';
+                    document.body.style.margin = '0';
+                    document.body.style.padding = '0';
+                    document.body.style.width = '100vw';
+                    document.body.style.height = '100vh';
+                }, 1000);
+            }, 7000); // 7 seconds
+            
+        }, 800);
     }
 };
 
-// Add shake animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes floatAway {
-        0% { transform: translateY(0) rotate(0); opacity: 1; }
-        100% { transform: translateY(-100px) rotate(20deg); opacity: 0; }
-    }
-    
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-10px); }
-        75% { transform: translateX(10px); }
-    }
-`;
-document.head.appendChild(style);
 
 // WHY BUTTON - the button you should NOT press
 document.getElementById('why-btn').onclick = () => {
     // Create a dramatic "why would you" moment
     const btn = document.getElementById('why-btn');
-    btn.textContent = '💔 why would you do this';
+    btn.textContent = 'Close The Scroll';
     btn.style.animation = 'none';
     btn.style.transform = 'scale(0.9)';
     btn.style.borderColor = '#ff0000';
@@ -3029,14 +3469,14 @@ document.getElementById('why-btn').onclick = () => {
         betrayalMsg.style.zIndex = '9999999';
         betrayalMsg.style.textShadow = '0 0 20px rgba(255,0,0,0.8)';
         betrayalMsg.style.animation = 'fadeInOut 3s ease-in-out forwards';
-        betrayalMsg.innerHTML = '💔<br><br>after everything?<br>really?';
+        betrayalMsg.textContent = 'The story remains, whenever thou art ready.';
         document.body.appendChild(betrayalMsg);
         
         setTimeout(() => {
             betrayalMsg.remove();
             // Reset button after dramatic pause
             setTimeout(() => {
-                btn.textContent = '💔 why would you';
+                btn.textContent = 'Close The Scroll';
                 btn.style.transform = '';
                 btn.style.borderColor = '';
                 btn.style.background = '';
@@ -3100,9 +3540,9 @@ function createMixedLightbox() {
     if (document.getElementById('mixed-lightbox')) return;
     
     const lightboxHTML = `
-        <div id="mixed-lightbox" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.95); z-index: 99999999; align-items: center; justify-content: center; cursor: pointer;">
-            <img id="lightbox-photo" style="display: none; max-width: 90%; max-height: 90%; object-fit: contain; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);">
-            <video id="lightbox-video" style="display: none; max-width: 90%; max-height: 90%; object-fit: contain; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); transform: rotate(270deg);" webkit-playsinline playsinline>
+        <div id="mixed-lightbox" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.95); z-index: 99999999; align-items: center; justify-content: center; cursor: pointer; padding: 20px; box-sizing: border-box;">
+            <img id="lightbox-photo" style="display: none; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);">
+            <video id="lightbox-video" style="display: none; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);" webkit-playsinline playsinline>
                 <source src="" type="video/mp4">
             </video>
             <button id="close-mixed-lightbox" style="position: absolute; top: 20px; right: 20px; font-family: 'Press Start 2P', monospace; font-size: 20px; padding: 15px 20px; background: #ff0000; color: white; border: none; border-radius: 10px; cursor: pointer; z-index: 999999999;">✕</button>
@@ -3153,10 +3593,12 @@ function initMixedPopups() {
                 
                 // Add controls for videos that should have them
                 if (media.rotate === true) {
-                    videoEl.setAttribute('controls', 'controls');
-                    // FORCE 90 DEGREE ROTATION for videos 1-4 (Catbox rotated videos)
-                    videoEl.style.transform = 'rotate(270deg)';
-                }
+    videoEl.setAttribute('controls', 'controls');
+    // Force rotation with proper scaling
+    videoEl.style.transform = 'rotate(270deg)';
+    // Add a class for CSS targeting
+    videoEl.classList.add('rotated-video');
+}
                 
                 videoEl.style.display = 'block';
                 
@@ -3198,6 +3640,148 @@ document.getElementById('memory-lane-btn').onclick = () => {
     createMixedLightbox();
     setTimeout(initMixedPopups, 100);
 };
+
+// CLOSE MEMORY LANE BUTTON - CLOSE EVERYTHING AND SHOW LOVE MESSAGE
+document.getElementById('close-memory-btn').onclick = () => {
+    // INSTANTLY HIDE BUTTONS - NO TRANSITION
+    const postButtons = document.getElementById('post-credits-buttons');
+    if (postButtons) {
+        postButtons.style.display = 'none';
+        postButtons.style.visibility = 'hidden';
+        postButtons.style.opacity = '0';
+        postButtons.style.pointerEvents = 'none';
+    }
+    
+    // INSTANTLY HIDE MEMORY LANE BUTTON
+    const memoryBtn = document.getElementById('memory-lane-btn');
+    if (memoryBtn) {
+        memoryBtn.style.display = 'none';
+        memoryBtn.style.visibility = 'hidden';
+    }
+    
+    // INSTANTLY HIDE WHY BUTTON
+    const whyBtn = document.getElementById('why-btn');
+    if (whyBtn) {
+        whyBtn.style.display = 'none';
+        whyBtn.style.visibility = 'hidden';
+    }
+    
+    // INSTANTLY HIDE ALL CREDIT BUTTONS
+    const creditBtns = document.querySelectorAll('.credit-btn');
+    creditBtns.forEach(btn => {
+        btn.style.display = 'none';
+        btn.style.visibility = 'hidden';
+    });
+    
+    // Hide memory lane modal
+    document.getElementById('memory-lane-modal').style.display = 'none';
+    
+    // Close any open lightbox and stop videos
+    const lightbox = document.getElementById('mixed-lightbox');
+    if (lightbox) {
+        lightbox.style.display = 'none';
+        const videoEl = document.getElementById('lightbox-video');
+        if (videoEl) {
+            videoEl.pause();
+            videoEl.src = '';
+            videoEl.load();
+        }
+    }
+    
+    // Create golden scroll transition
+    const transition = document.createElement('div');
+    transition.className = 'scroll-transition';
+    document.body.appendChild(transition);
+    
+    // Wait for transition to peak
+    setTimeout(() => {
+        // Remove transition
+        transition.remove();
+        
+        // HIDE SCENE 2 COLETELY
+        const scene2 = document.getElementById('scene2');
+        scene2.style.opacity = '0';
+        scene2.style.pointerEvents = 'none';
+        scene2.style.display = 'none';
+        
+        // HIDE FINAL SCENE COMPLETELY
+        const finalScene = document.getElementById('final-scene');
+        finalScene.style.opacity = '0';
+        finalScene.style.pointerEvents = 'none';
+        finalScene.style.display = 'none';
+        
+        // HIDE END CREDITS
+        const endCredits = document.getElementById('end-credits');
+        if (endCredits) {
+            endCredits.style.opacity = '0';
+            endCredits.style.display = 'none';
+        }
+        
+        // HIDE ANY OTHER MODALS
+        const letterModal = document.getElementById('letter-modal');
+        if (letterModal) letterModal.style.display = 'none';
+        
+        const refusalModal = document.getElementById('refusal-modal');
+        if (refusalModal) refusalModal.style.display = 'none';
+        
+        // Show full screen love message with PIXELATED FONT
+        const loveMsg = document.getElementById('love-message');
+        loveMsg.style.display = 'flex';
+        loveMsg.style.opacity = '0';
+        
+        setTimeout(() => {
+            loveMsg.style.transition = 'opacity 1.5s ease';
+            loveMsg.style.opacity = '1';
+        }, 50);
+        
+        // Keep message for 7 seconds, then close website
+        setTimeout(() => {
+            // Fade out
+            loveMsg.style.transition = 'opacity 1s ease';
+            loveMsg.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Close the website/tab
+                window.close();
+                
+                // Fallback if window.close() is blocked
+                document.body.innerHTML = '';
+                document.body.style.background = '#0a0a14';
+                document.body.style.margin = '0';
+                document.body.style.padding = '0';
+                document.body.style.width = '100vw';
+                document.body.style.height = '100vh';
+            }, 1000);
+        }, 7000); // 7 seconds
+        
+    }, 800);
+};
+
+// =====================================
+// BACKGROUND MUSIC - SIMPLE VOLUME CONTROL
+// =====================================
+
+const bgMusic = document.getElementById('bg-music');
+
+// SET YOUR DESIRED VOLUME HERE (0.0 to 1.0)
+// 0.1 = 10%, 0.15 = 15%, 0.2 = 20%, etc.
+bgMusic.volume = 0.1; // CHANGE THIS NUMBER TO ADJUST VOLUME
+
+// DEBUG: Check if audio loaded
+bgMusic.addEventListener('loadeddata', () => {
+    console.log('✅ Music loaded successfully at volume:', bgMusic.volume);
+});
+
+bgMusic.addEventListener('error', (e) => {
+    console.log('❌ Music failed to load:', e);
+});
+
+// Start music on first click - NO FADE, JUST YOUR VOLUME
+document.addEventListener('click', function startMusic() {
+    console.log('🎵 Playing music at volume:', bgMusic.volume);
+    bgMusic.play().catch(e => console.log('❌ Music play failed:', e));
+    document.removeEventListener('click', startMusic);
+}, { once: true });
 
     </script>
 </body>
