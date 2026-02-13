@@ -7,11 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
-
-        @media (max-width: 1439px) {
-    body { zoom: calc(100vw / 1440); }
-}
-
         /* Add hardware acceleration and will-change properties */
         * {
             margin: 0;
@@ -436,11 +431,11 @@
         /* ======================== */
         /* DARK CASTLE TOWER - SCALED 2.5x */
         /* ======================== */
-        /* ==================== */
+/* ==================== */
 /* CASTLE - LOCKED TO ISLAND'S Y POSITION */
 /* ==================== */
 
-/* Island's actual position reference - SINGLE SOURCE OF TRUTH */
+/* Island - REFERENCE POINT (DO NOT CHANGE) */
 .island-oval {
     position: absolute;
     bottom: calc(35vh - 140px);
@@ -461,123 +456,169 @@
     pointer-events: none;
 }
 
-/* Castle - uses SAME bottom calculation + offset */
+/* CASTLE - MATHEMATICALLY LOCKED TO ISLAND ON BOTH AXES */
 .tower-wrap {
     position: absolute;
-    bottom: calc(35vh - 140px + 685px); /* Your laptop offset */
-    right: -36.4%;
+    
+    /* Y-AXIS FORMULA: Island bottom + castle height offset */
+    bottom: calc(35vh - 140px + 685px);
+    
+    /* X-AXIS FORMULA: Center of island (50%) + adjustment to align tower base */
+    left: calc(50% + 1790px);
+    
+    /* TRANSFORM: Scale locked at 1.5, NO translateX */
+    transform: scale(1.5);
+    
     width: 700px;
     z-index: 7;
     pointer-events: none;
-    transform: scale(1.5);
-    transform-origin: bottom center;
+    transform-origin: center bottom;
 }
 
-/* ==================== */
-/* DEVICE-SPECIFIC ADJUSTMENTS - OVERRIDE BOTTOM COMPLETELY */
-/* ==================== */
-
-/* Small Laptops */
-
+/* RESPONSIVE SCALING - SCALE STAYS 1.5, ONLY X-AXIS ADJUSTS */
 @media (max-width: 1320px) {
     .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -48%;
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 690px);
         transform: scale(1.5);
         width: 650px;
     }
 }
 
-@media (max-width: 1290px) {
+@media (max-width: 1240px) {
     .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -49.5%;
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 640px);
         transform: scale(1.5);
-        width: 650px;
+        width: 620px;
     }
 }
 
-@media (max-width: 1284px) {
+@media (max-width: 1160px) {
     .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -50%;
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 590px);
         transform: scale(1.5);
-        width: 650px;
-    }
-}
-
-@media (max-width: 1242px) {
-    .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -51.5%;
-        transform: scale(1.5);
-        width: 650px;
-    }
-}
-
-@media (max-width: 1179px) {
-    .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -54%;
-        transform: scale(1.5);
-        width: 650px;
-    }
-}
-
-@media (max-width: 1170px) {
-    .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -54.5%;
-        transform: scale(1.5);
-        width: 650px;
-    }
-}
-
-@media (max-width: 1125px) {
-    .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -56.5%;
-        transform: scale(1.5);
-        width: 650px;
+        width: 600px;
     }
 }
 
 @media (max-width: 1080px) {
     .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -58.5%;
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 540px);
         transform: scale(1.5);
-        width: 650px;
+        width: 580px;
     }
 }
 
-@media (max-width: 828px) {
+@media (max-width: 1000px) {
     .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -77%;
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 490px);
         transform: scale(1.5);
-        width: 650px;
+        width: 560px;
     }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 920px) {
     .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -85%;
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 440px);
         transform: scale(1.5);
-        width: 650px;
+        width: 540px;
+    }
+}
+
+@media (max-width: 840px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 390px);
+        transform: scale(1.5);
+        width: 520px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 345px);
+        transform: scale(1.5);
+        width: 500px;
+    }
+}
+
+@media (max-width: 700px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 302.5px);
+        transform: scale(1.5);
+        width: 480px;
     }
 }
 
 @media (max-width: 640px) {
     .tower-wrap {
-        bottom: calc(35vh - 140px + 685px) !important; /* Adjust this value */
-        right: -100%;
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 265px);
         transform: scale(1.5);
-        width: 650px;
+        width: 460px;
     }
 }
-  
+
+@media (max-width: 580px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 227.5px);
+        transform: scale(1.5);
+        width: 440px;
+    }
+}
+
+@media (max-width: 520px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 190px);
+        transform: scale(1.5);
+        width: 420px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 165px);
+        transform: scale(1.5);
+        width: 400px;
+    }
+}
+
+@media (max-width: 440px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 140px);
+        transform: scale(1.5);
+        width: 380px;
+    }
+}
+
+@media (max-width: 400px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 115px);
+        transform: scale(1.5);
+        width: 360px;
+    }
+}
+
+@media (max-width: 360px) {
+    .tower-wrap {
+        bottom: calc(35vh - 140px + 685px);
+        left: calc(50% + 90px);
+        transform: scale(1.5);
+        width: 340px;
+    }
+}
 
         
 
@@ -1764,25 +1805,25 @@
 }
 
 
-/* POST-CREDITS BUTTONS */
+/* POST-CREDITS BUTTONS - SCROLL FROM BOTTOM TO CENTER */
 #post-credits-buttons {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
     bottom: -200px;
     opacity: 0;
-    transition: bottom 10s ease-out, opacity 1.5s ease-out;
+    transition: bottom 25s cubic-bezier(0.34, 1.2, 0.64, 1), opacity 1.5s ease-out;
     z-index: 1002;
+    pointer-events: none;
 }
 
 #post-credits-buttons.show {
     bottom: 50%;
     opacity: 1;
+    pointer-events: auto;
 }
 
 .credit-btn {
@@ -1800,181 +1841,6 @@
     box-shadow: 0 0 15px rgba(123, 192, 200, 0.3);
 }
 
-/* ==================== */
-/* MOBILE BUTTON FIXES - ALL BREAKPOINTS */
-/* ==================== */
-
-/* 1200px and below */
-@media (max-width: 1200px) {
-    .credit-btn {
-        font-size: 14px;
-        padding: 15px 25px;
-        gap: 25px;
-    }
-}
-
-/* 1000px and below */
-@media (max-width: 1000px) {
-    .credit-btn {
-        font-size: 14px;
-        padding: 15px 25px;
-        gap: 25px;
-    }
-}
-
-/* 810px and below */
-@media (max-width: 810px) {
-    .credit-btn {
-        font-size: 15px;
-        padding: 16px 28px;
-        gap: 25px;
-    }
-    #post-credits-buttons.show {
-        bottom: 40%;
-    }
-}
-
-/* 800px and below */
-@media (max-width: 800px) {
-    .credit-btn {
-        font-size: 15px;
-        padding: 16px 28px;
-        gap: 25px;
-    }
-    #post-credits-buttons.show {
-        bottom: 40%;
-    }
-}
-
-/* 768px and below - Tablet */
-@media (max-width: 768px) {
-    #post-credits-buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-        padding-bottom: 20px;
-    }
-    
-    #post-credits-buttons.show {
-        bottom: 40%;
-    }
-    
-    .credit-btn {
-        font-size: 16px;
-        padding: 18px 30px;
-        margin: 0 auto;
-        width: 80%;
-        max-width: 400px;
-        display: block;
-    }
-}
-
-/* 600px and below */
-@media (max-width: 600px) {
-    .credit-btn {
-        font-size: 16px;
-        padding: 18px 28px;
-        width: 85%;
-    }
-    #post-credits-buttons {
-        gap: 22px;
-    }
-    #post-credits-buttons.show {
-        bottom: 40%;
-    }
-}
-
-/* 480px and below - Small Phones */
-@media (max-width: 480px) {
-    .credit-btn {
-        font-size: 15px;
-        padding: 16px 25px;
-        width: 90%;
-    }
-    #post-credits-buttons {
-        gap: 20px;
-    }
-    #post-credits-buttons.show {
-        bottom: 40%;
-    }
-}
-
-/* 414px and below - iPhone 11/12/13 Pro Max */
-@media (max-width: 414px) {
-    .credit-btn {
-        font-size: 15px;
-        padding: 16px 24px;
-        width: 92%;
-    }
-    #post-credits-buttons {
-        gap: 18px;
-    }
-    #post-credits-buttons.show {
-        bottom: 40%;
-    }
-}
-
-/* 390px and below - iPhone 12/13 */
-@media (max-width: 390px) {
-    .credit-btn {
-        font-size: 14px;
-        padding: 15px 22px;
-        width: 93%;
-    }
-    #post-credits-buttons {
-        gap: 18px;
-    }
-    #post-credits-buttons.show {
-        bottom: 40%;
-    }
-}
-
-/* 375px and below - iPhone SE/6/7/8 */
-@media (max-width: 375px) {
-    .credit-btn {
-        font-size: 14px;
-        padding: 14px 20px;
-        width: 94%;
-    }
-    #post-credits-buttons {
-        gap: 16px;
-    }
-    #post-credits-buttons.show {
-        bottom: 40%;
-    }
-}
-
-/* 360px and below - Galaxy S20/S21 */
-@media (max-width: 360px) {
-    .credit-btn {
-        font-size: 13px;
-        padding: 13px 18px;
-        width: 95%;
-    }
-    #post-credits-buttons {
-        gap: 15px;
-    }
-    #post-credits-buttons.show {
-        bottom: 40%;
-    }
-}
-
-/* 320px and below - iPhone SE 1st gen */
-@media (max-width: 320px) {
-    .credit-btn {
-        font-size: 12px;
-        padding: 12px 16px;
-        width: 96%;
-    }
-    #post-credits-buttons {
-        gap: 14px;
-    }
-    #post-credits-buttons.show {
-        bottom: 40%;
-    }
-}
-
 .credit-btn:hover {
     transform: scale(1.1);
     background: #2d1f3d;
@@ -1982,47 +1848,335 @@
     box-shadow: 0 0 25px rgba(255, 204, 102, 0.5);
 }
 
-#dishonor-btn {
-    border-color: #ff6666;
-    box-shadow: 0 0 15px rgba(255, 102, 102, 0.3);
+/* MEMORY LANE BUTTON - SPECIAL COLOR */
+.memory-btn {
+    border-color: #ffd700 !important;
+    background: #2a1a2a !important;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3) !important;
 }
 
-#dishonor-btn:hover {
-    border-color: #ff3333;
-    background: #3d1f1f;
-    box-shadow: 0 0 25px rgba(255, 51, 51, 0.5);
+.memory-btn:hover {
+    border-color: #ffaa00 !important;
+    background: #3a1f3a !important;
+    box-shadow: 0 0 25px rgba(255, 170, 0, 0.5) !important;
 }
+
+/* WHY BUTTON - the button nobody should press */
+.why-btn {
+    border-color: #ff69b4 !important;
+    background: #2a1a2a !important;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.3) !important;
+    animation: why-pulse 2s ease-in-out infinite !important;
+}
+
+.why-btn:hover {
+    border-color: #ff1493 !important;
+    background: #3a1f3a !important;
+    box-shadow: 0 0 25px rgba(255, 20, 147, 0.5) !important;
+    animation: why-shake 0.3s ease-in-out !important;
+}
+
+@keyframes why-pulse {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 0.9;
+    }
+    50% { 
+        transform: scale(1.05);
+        opacity: 1;
+        border-color: #ff1493 !important;
+    }
+}
+
+@keyframes why-shake {
+    0%, 100% { transform: scale(1.1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(-5deg); }
+    75% { transform: scale(1.1) rotate(5deg); }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    #post-credits-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        width: 90%;
+    }
+    
+    #post-credits-buttons.show {
+        bottom: 45%;
+    }
+    
+    .credit-btn {
+        font-size: 14px;
+        padding: 15px 25px;
+        width: 80%;
+        max-width: 300px;
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #post-credits-buttons.show {
+        bottom: 40%;
+    }
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -30%); }
+    20% { opacity: 1; transform: translate(-50%, -50%); }
+    80% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -70%); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-15px); }
+    75% { transform: translateX(15px); }
+}
+
+/* MEMORY LANE MODAL */
+#memory-lane-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+    box-sizing: border-box;
+}
+
+.memory-content {
+    background: #1a1428;
+    border: 3px solid #ffd700;
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+    box-sizing: border-box;
+    position: relative;
+}
+
+.memory-content h2 {
+    font-family: 'Press Start 2P', monospace;
+    color: #ffd700;
+    font-size: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    word-wrap: break-word;
+}
+
+/* PHOTO COLLAGE GRID */
+.photo-collage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.photo-frame {
+    aspect-ratio: 1 / 1;
+    background: #2d1f3d;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-frame:hover {
+    transform: scale(1.05);
+    border-color: #ffaa00;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+.photo-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.photo-label {
+    font-family: 'Press Start 2P', monospace;
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.photo-date {
+    font-family: 'Press Start 2P', monospace;
+    color: #ffd700;
+    font-size: 8px;
+    margin-top: 8px;
+}
+
+/* CLOSE BUTTON */
+#close-memory-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    padding: 12px 30px;
+    background: #ffd700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #1a1428;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto;
+}
+
+#close-memory-btn:hover {
+    transform: scale(1.1);
+    background: #ffaa00;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+/* RESPONSIVE COLLAGE */
+@media (max-width: 768px) {
+    .photo-collage {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .memory-content h2 {
+        font-size: 16px;
+    }
+    
+    .photo-icon {
+        font-size: 30px;
+    }
+    
+    .photo-label {
+        font-size: 9px;
+    }
+    
+    .photo-date {
+        font-size: 7px;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-collage {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .memory-content {
+        padding: 20px;
+    }
+    
+    .photo-frame {
+        padding: 10px;
+    }
+    
+    .photo-icon {
+        font-size: 25px;
+    }
+    
+    .photo-label {
+        font-size: 8px;
+    }
+    
+    .photo-date {
+        font-size: 6px;
+    }
+    
+    #close-memory-btn {
+        font-size: 12px;
+        padding: 10px 25px;
+    }
+}
+
+@media (max-width: 375px) {
+    .photo-collage {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    .photo-icon {
+        font-size: 22px;
+    }
+    
+    .photo-label {
+        font-size: 7px;
+    }
+}
+
 
 /* ==================== */
-/* UNIVERSAL RESPONSIVE SYSTEM */
-/* Maintains exact laptop proportions on ALL devices */
+/* SIMPLE RESPONSIVE FIX FOR PHONES */
 /* ==================== */
 
-/* Base viewport scaling - automatically scales everything */
-@media (max-width: 1440px) {
-    body {
-        zoom: calc(100vw / 1440);
+/* Base styles for all devices */
+html, body {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Small phones - ONLY adjust hint and buttons, NOT tower */
+@media (max-width: 480px) {
+    #tap-window-hint {
+        font-size: 12px !important;
+        right: 20px !important;
+        bottom: calc(35vh + 150px) !important;
+    }
+    
+    #post-credits-buttons .credit-btn {
+        font-size: 12px !important;
+        padding: 12px 20px !important;
+    }
+    
+    #letter-text {
+        font-size: 16px !important;
     }
 }
 
-/* Alternative method using transform for better compatibility */
-@supports not (zoom: 1) {
-    @media (max-width: 1440px) {
-        body {
-            transform: scale(calc(100vw / 1440));
-            transform-origin: top left;
-            width: 1440px;
-            height: calc(100vh / (100vw / 1440));
-        }
+/* iPhone SE and very small phones */
+@media (max-width: 375px) {
+    #tap-window-hint {
+        bottom: calc(35vh + 120px) !important;
+        right: 15px !important;
+        font-size: 10px !important;
     }
 }
 
-/* Disable zoom on very large screens */
-@media (min-width: 1441px) {
+/* Fix for notches and safe areas */
+@supports (padding: max(0px)) {
     body {
-        zoom: 1;
-        transform: none;
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
     }
+}
+
+/* Disable zoom on all devices - LET THE BROWSER HANDLE IT */
+body {
+    zoom: 1 !important;
+    transform: none !important;
+    width: 100vw !important;
+    height: 100vh !important;
 }
 
 /* Mobile Safari specific fixes */
@@ -2408,56 +2562,96 @@ html, body {
         <div id="tap-window-hint">TAP WINDOW</div>
 </div>
 <div id="final-scene">
-            <div id="end-credits">
-                <div class="credit-title">TO MY DEAREST MAIDEN</div>
-        
-                <div class="credit-text">
+    <div id="end-credits">
+        <div class="credit-title">TO MY DEAREST MAIDEN</div>
+
+        <div class="credit-text">
             Through pixelated seas and digital skies,<br>
             This humble messenger before you flies.<br>
             Not just a bird, but my heart's true carrier,<br>
             Bringing words that make my soul less wearier.
-                </div>
-        
-                <div class="credit-text">
+        </div>
+
+        <div class="credit-text">
             In this realm of code, where ones and zeros play,<br>
             You are the sunshine that brightens my day.<br>
             Your laughter echoes in my memory's halls,<br>
             A melody that through my being calls.
-                </div>
-        
-                <div class="credit-text">
+        </div>
+
+        <div class="credit-text">
             Though towers may rise and oceans may part,<br>
             You remain the beat within my heart.<br>
             No distance too great, no challenge too tall,<br>
             For you, my love, I would conquer all.
-                </div>
-        
-                <div class="credit-signature">
+        </div>
+
+        <div class="credit-signature">
             Forever Yours,<br>
             Your Devoted Knight
-                </div>
-        
-                <div class="credit-final">
+        </div>
+
+        <div class="credit-final">
             THE END
-                </div>
-            </div>
-            <div id="post-credits-buttons">
-    <button id="write-letter-btn" class="credit-btn">✎ WRITE HIM A LETTER TOO</button>
-    <button id="dishonor-btn" class="credit-btn">⚔ DISHONOR HIS LOVE</button>
-</div>
-
-    </div>
-
-    <div id="letter-composer" style="display: none;">
-    <div class="composer-content">
-        <h2>Write Your Letter</h2>
-        <textarea id="her-letter" placeholder="Dearest Knight..."></textarea>
-        <div class="composer-buttons">
-            <button id="send-letter-btn">✈ SEND</button>
-            <button id="cancel-letter-btn">✕ CANCEL</button>
         </div>
     </div>
+    
+    <!-- POST-CREDITS BUTTONS - SCROLLS FROM BOTTOM TO CENTER -->
+    <div id="post-credits-buttons">
+        <button id="memory-lane-btn" class="credit-btn memory-btn">📸 MEMORY LANE</button>
+        <button id="why-btn" class="credit-btn why-btn">💔 why would you</button>
+    </div>
 </div>
+
+<!-- MEMORY LANE MODAL - 4 MONTH COLLAGE -->
+<div id="memory-lane-modal" style="display: none;">
+    <div class="memory-content">
+        <h2>✨ OUR 4 MONTH JOURNEY ✨</h2>
+        
+        <div class="photo-collage">
+            <!-- MONTH 1 -->
+            <div class="photo-frame">
+                <div class="photo-icon">💖</div>
+                <div class="photo-label">WHEN WE MET</div>
+            </div>
+            
+            <!-- MONTH 2 -->
+            <div class="photo-frame">
+                <div class="photo-icon">💫</div>
+                <div class="photo-label">FIRST DATE</div>
+            </div>
+            
+            <!-- MONTH 3 -->
+            <div class="photo-frame">
+                <div class="photo-icon">🌹</div>
+                <div class="photo-label">FALLING DEEPER</div>
+            </div>
+            
+            <!-- MONTH 4 -->
+            <div class="photo-frame">
+                <div class="photo-icon">💍</div>
+                <div class="photo-label">YOU & ME</div>
+            </div>
+            
+            <!-- MONTH 5 (placeholder for future) -->
+            <div class="photo-frame">
+                <div class="photo-icon">✨</div>
+                <div class="photo-label">MORE TO COME</div>
+            </div>
+            
+            <!-- MONTH 6 (placeholder for future) -->
+            <div class="photo-frame">
+                <div class="photo-icon">💝</div>
+                <div class="photo-label">FOREVER</div>
+                <div class="photo-date">& BEYOND</div>
+            </div>
+        </div>
+        
+        <button id="close-memory-btn">✕ CLOSE MEMORIES</button>
+    </div>
+</div>
+
+
     <script>
 // Performance optimization: Throttle animations and events
 let lastTime = 0;
@@ -2760,13 +2954,13 @@ setTimeout(() => {
     // SHOW BUTTONS AFTER CREDITS SCROLL - PIXEL PERFECT TIMING
     const width = window.innerWidth;
     let buttonDelay = 65000; // default desktop
-    
-        if (width <= 640) buttonDelay = 55000;
+        if (width <= 490) buttonDelay = 57050;
+    else if (width <= 640) buttonDelay = 55000;
     else if (width <= 750) buttonDelay = 53000;
     else if (width <= 828) buttonDelay = 51500;
     else if (width <= 1080) buttonDelay = 48000; // FIXED
     else if (width <= 1125) buttonDelay = 48000;
-    else if (width <= 1170) buttonDelay = 4700;
+    else if (width <= 1170) buttonDelay = 47000;
     else if (width <= 1179) buttonDelay = 45750;
     else if (width <= 1242) buttonDelay = 45750;
     else if (width <= 1284) buttonDelay = 45750; // FIXED - LOWEST
@@ -2780,76 +2974,16 @@ setTimeout(() => {
     
 }, 500);
 
-// DISHONOR BUTTON - JANKY SHIT
-document.getElementById('dishonor-btn').onclick = () => {
-    const jankyMessages = [
-        "💔 How could you?!",
-        "⚡ The knight drops his sword...",
-        "🌧 It starts raining on the castle...",
-        "😭 Pigeon2 flies away crying",
-        "📜 The letter burns to ash",
-        "🏰 The tower crumbles!",
-        "💀 He will never love again",
-        "🎭 This was not the way..."
-    ];
-    
-    // Create janky floating messages
-    for(let i = 0; i < 10; i++) {
-        setTimeout(() => {
-            const msg = document.createElement('div');
-            msg.textContent = jankyMessages[Math.floor(Math.random() * jankyMessages.length)];
-            msg.style.cssText = `
-                position: fixed;
-                left: ${Math.random() * 100}vw;
-                top: ${Math.random() * 100}vh;
-                color: #ff6666;
-                font-family: 'Press Start 2P', monospace;
-                font-size: ${Math.random() * 20 + 10}px;
-                z-index: 9999999;
-                text-shadow: 2px 2px 0 #000;
-                animation: floatAway 2s ease-out forwards;
-            `;
-            document.body.appendChild(msg);
-            setTimeout(() => msg.remove(), 2000);
-        }, i * 100);
+// CLOSE MEMORY LANE
+document.getElementById('close-memory-btn').onclick = () => {
+    document.getElementById('memory-lane-modal').style.display = 'none';
+};
+
+// Close modal by clicking outside
+document.getElementById('memory-lane-modal').onclick = (e) => {
+    if (e.target === document.getElementById('memory-lane-modal')) {
+        document.getElementById('memory-lane-modal').style.display = 'none';
     }
-    
-    // Shake the screen
-    document.body.style.animation = 'shake 0.5s';
-    setTimeout(() => document.body.style.animation = '', 500);
-    
-    // Disable the button
-    this.disabled = true;
-    this.textContent = '💔 HONOR DESTROYED 💔';
-};
-
-// WRITE LETTER BUTTON
-document.getElementById('write-letter-btn').onclick = () => {
-    document.getElementById('letter-composer').style.display = 'flex';
-};
-
-// SEND LETTER VIA SMS (Email-to-SMS Gateway)
-document.getElementById('send-letter-btn').onclick = () => {
-    const letter = document.getElementById('her-letter').value;
-    if (letter.trim() === '') {
-        alert('Write something first! 💌');
-        return;
-    }
-    
-    // Find your carrier gateway below and replace YOUR_NUMBER
-    window.location.href = `mailto:YOUR_NUMBER@vtext.com?subject=&body=${encodeURIComponent(letter)}`;
-    
-    alert('📱 Letter sent to his phone!');
-    
-    // Close composer
-    document.getElementById('letter-composer').style.display = 'none';
-    document.getElementById('her-letter').value = '';
-};
-
-// CANCEL LETTER
-document.getElementById('cancel-letter-btn').onclick = () => {
-    document.getElementById('letter-composer').style.display = 'none';
-    document.getElementById('her-letter').value = '';
 };
 
 // Add shake animation
@@ -2867,6 +3001,203 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// WHY BUTTON - the button you should NOT press
+document.getElementById('why-btn').onclick = () => {
+    // Create a dramatic "why would you" moment
+    const btn = document.getElementById('why-btn');
+    btn.textContent = '💔 why would you do this';
+    btn.style.animation = 'none';
+    btn.style.transform = 'scale(0.9)';
+    btn.style.borderColor = '#ff0000';
+    btn.style.background = '#4a0a0a';
+    
+    // Make the screen tremble
+    document.getElementById('final-scene').style.animation = 'shake 0.2s ease-in-out 3';
+    
+    // Show a betrayal message
+    setTimeout(() => {
+        const betrayalMsg = document.createElement('div');
+        betrayalMsg.style.position = 'fixed';
+        betrayalMsg.style.top = '30%';
+        betrayalMsg.style.left = '50%';
+        betrayalMsg.style.transform = 'translate(-50%, -50%)';
+        betrayalMsg.style.color = '#ff6666';
+        betrayalMsg.style.fontFamily = "'Press Start 2P', monospace";
+        betrayalMsg.style.fontSize = '16px';
+        betrayalMsg.style.textAlign = 'center';
+        betrayalMsg.style.zIndex = '9999999';
+        betrayalMsg.style.textShadow = '0 0 20px rgba(255,0,0,0.8)';
+        betrayalMsg.style.animation = 'fadeInOut 3s ease-in-out forwards';
+        betrayalMsg.innerHTML = '💔<br><br>after everything?<br>really?';
+        document.body.appendChild(betrayalMsg);
+        
+        setTimeout(() => {
+            betrayalMsg.remove();
+            // Reset button after dramatic pause
+            setTimeout(() => {
+                btn.textContent = '💔 why would you';
+                btn.style.transform = '';
+                btn.style.borderColor = '';
+                btn.style.background = '';
+                document.getElementById('final-scene').style.animation = '';
+            }, 2000);
+        }, 3000);
+    }, 300);
+};
+
+// =====================================
+// MEMORY LANE - 5 VIDEOS + 1 PHOTO
+// =====================================
+
+// MIXED MEDIA ARRAY - 5 VIDEOS, 1 PHOTO
+const memoryMedia = [
+    {
+        type: "video",
+        src: "https://files.catbox.moe/4e195f.mp4", // REPLACE WITH VIDEO 1 URL
+        label: "WHEN WE MET",
+        rotate: true,
+        icon: "💖"
+    },
+    {
+        type: "video",
+        src: "https://files.catbox.moe/6c0ui8.mp4", // REPLACE WITH VIDEO 2 URL
+        label: "FIRST DATE",
+        rotate: true,
+        icon: "💫"
+    },
+    {
+        type: "video",
+        src: "https://files.catbox.moe/0d0gvm.mp4", // REPLACE WITH VIDEO 3 URL
+        label: "FALLING DEEPER",
+        rotate: true,
+        icon: "🌹"
+    },
+    {
+        type: "video",
+        src: "https://files.catbox.moe/kfhtur.mp4", // REPLACE WITH VIDEO 4 URL
+        label: "YOU & ME",
+        rotate: true,
+        icon: "💍"
+    },
+    {
+        type: "video",
+        src: "https://files.catbox.moe/70pcc7.mp4", // REPLACE WITH VIDEO 5 URL
+        label: "MORE TO COME",
+        rotate: false,
+        icon: "✨"
+    },
+    {
+        type: "photo",
+        src: "https://files.catbox.moe/m95twj.png", // REPLACE WITH PHOTO URL
+        label: "FOREVER",
+        icon: "💝"
+    }
+];
+
+// Create the mixed media lightbox
+function createMixedLightbox() {
+    if (document.getElementById('mixed-lightbox')) return;
+    
+    const lightboxHTML = `
+        <div id="mixed-lightbox" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.95); z-index: 99999999; align-items: center; justify-content: center; cursor: pointer;">
+            <img id="lightbox-photo" style="display: none; max-width: 90%; max-height: 90%; object-fit: contain; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);">
+            <video id="lightbox-video" style="display: none; max-width: 90%; max-height: 90%; object-fit: contain; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); transform: rotate(270deg);" webkit-playsinline playsinline>
+                <source src="" type="video/mp4">
+            </video>
+            <button id="close-mixed-lightbox" style="position: absolute; top: 20px; right: 20px; font-family: 'Press Start 2P', monospace; font-size: 20px; padding: 15px 20px; background: #ff0000; color: white; border: none; border-radius: 10px; cursor: pointer; z-index: 999999999;">✕</button>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+}
+// Initialize popups
+function initMixedPopups() {
+    const photoFrames = document.querySelectorAll('.photo-frame');
+    const lightbox = document.getElementById('mixed-lightbox');
+    const photoEl = document.getElementById('lightbox-photo');
+    const videoEl = document.getElementById('lightbox-video');
+    const closeBtn = document.getElementById('close-mixed-lightbox');
+    
+    if (!lightbox || !photoEl || !videoEl) return;
+    
+    // IMPORTANT: Clear any existing source first
+    videoEl.src = '';
+    videoEl.load();
+    
+    photoFrames.forEach((frame, index) => {
+        frame.onclick = (e) => {
+            e.stopPropagation();
+            
+            const media = memoryMedia[index];
+            
+            if (!media.src) {
+                alert('✨ This memory is still being developed! ✨');
+                return;
+            }
+            
+            // Reset everything
+            photoEl.style.display = 'none';
+            videoEl.style.display = 'none';
+            videoEl.pause();
+            videoEl.removeAttribute('controls');
+            videoEl.style.transform = ''; // Reset rotation
+            videoEl.src = '';
+            videoEl.load();
+            
+            if (media.type === 'photo') {
+                photoEl.src = media.src;
+                photoEl.style.display = 'block';
+            } else {
+                // Set video source
+                videoEl.src = media.src;
+                
+                // Add controls for videos that should have them
+                if (media.rotate === true) {
+                    videoEl.setAttribute('controls', 'controls');
+                    // FORCE 90 DEGREE ROTATION for videos 1-4 (Catbox rotated videos)
+                    videoEl.style.transform = 'rotate(270deg)';
+                }
+                
+                videoEl.style.display = 'block';
+                
+                // Auto-play
+                videoEl.play().catch(e => console.log('Play prevented:', e));
+            }
+            
+            lightbox.style.display = 'flex';
+        };
+    });
+    
+    if (closeBtn) {
+        closeBtn.onclick = (e) => {
+            e.stopPropagation();
+            lightbox.style.display = 'none';
+            videoEl.pause();
+            videoEl.style.transform = ''; // Reset rotation
+            videoEl.src = '';
+            videoEl.load();
+            photoEl.src = '';
+        };
+    }
+    
+    lightbox.onclick = (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+            videoEl.pause();
+            videoEl.style.transform = ''; // Reset rotation
+            videoEl.src = '';
+            videoEl.load();
+            photoEl.src = '';
+        };
+    }
+}
+
+// Override memory lane button
+document.getElementById('memory-lane-btn').onclick = () => {
+    document.getElementById('memory-lane-modal').style.display = 'flex';
+    createMixedLightbox();
+    setTimeout(initMixedPopups, 100);
+};
 
     </script>
 </body>
